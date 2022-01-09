@@ -1,9 +1,16 @@
 import React from "react";
-import {Old} from "./src/old";
+//import { Main } from "./src/index";
+import type {Node} from 'react';
+import {
+  Text,
+} from 'react-native';
 
-const App = ()=>{
+import { Main } from "./src/Main";
+
+
+const App: ()=> Node = () => {
   return (
-    <Old />
+    <Main />
   );
 }
 
