@@ -1,15 +1,16 @@
-import { UNDEFINED } from "../CONSTANTS";
+import { UNDEFINED, SAVE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
 import { PermissionsAndroid, Platform } from "react-native";
-import { getRealm } from "./realm-setup";
 import { FileItemsAbstract } from "./file-items-abstract";
 import CameraRoll from "@react-native-community/cameraroll";
+
+import { getFakeDB } from "../storage/fake/fakeDB";
 
 const DEFAULT_SORTORDER = "asc";
 
 
 
 async function checkHasPermission() {
-  if(OKatform.OS !== "android"){
+  if(Platform.OS !== "android"){
     return Promise.resolve(true);
   }
   const permission = PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE;
@@ -23,40 +24,50 @@ async function checkHasPermission() {
   return status === 'granted';
 }
 
-class UnMarkedFileItems {
+class UnmarkedFileItems extends FileItemsAbstract {
   lastOffset = 0;
-  sortorder = DEFAULT_SORTORDER;
+  sortOrder = DEFAULT_SORTORDER;
   constructor(){
     super();
   }
+
+  async getAllPictures(){
+    var totalPictureArray = []
+    var hasNextPage = true
+    do{
+      var tempPictureList = await CameraRoll.getPhotos({
+        first: SAVE_MAX_NUMBER_VALUE,
+        groupTypes: "SavedPhotos",
+        assetType: "Photos",
+      })
+      totalPictureArray = totalPictureArray.concat(tempPictureList.edges);
+      hasNextPage = tempPictureList.has_next_page;
+    }while(hasNextPage);
+
+    return totalPictureArray;
+  }
+
   async getNextTen(){
     const hasPermission = await checkHasPermission();
     if(!hasPermission){
       throw new Error("Don't have permission to read external storage")
     }
-    const [realm, photos] = await Promise.all([
-      getRealm(),
-      CameraRoll.getPhotos({
-        first: Number.MAX_VALUE,
-        groupTypes: "SavedPhotos",
-        assetType: "Photos",
-        include: ["filename"]
-      })
+    const [db, photos] = await Promise.all([
+      getFakeDB(),
+      this.getAllPictures()
     ]);
 
-    if(photos.edges.length <= this.lastOffset){
+    if(photos.length <= this.lastOffset){
       console.log("no more photos available");
       return [];
     }
 
-    var markedFileObjects = realm.objects("MarkedFile");
     const nextTenItems = [];
 
     async function checkIsItemMarked(fileuri){
-      var filesMatchingPath = markedFileObjects.filtered(`fileuri == '${fileuri.replace("\'", "\\'")}'`);
-      // filesMatchingPath should either be 0 or 1, if its more than 1 theres been an error
-      return filesMatchingPath.length > 0;
+      return await db.hasItem("fileuri", fileuri);
     }
+    console.log("last is oldest?", photos[photos.length - 1].node.timestamp < photos[0].node.timestamp)
 
     if(this.sortOrder === "asc"){
       var currentIndex = photos.length - 1 - this.lastOffset;
@@ -64,10 +75,10 @@ class UnMarkedFileItems {
       var currentFilePath;
       var currentFileName;
       while(nextTenItems.length < 10 && currentIndex >= 0){
-        currentFile = photos.edges[currentIndex];
+        currentFile = photos[currentIndex].node;
+        console.log("currentFile:", currentFile)
         currentFilePath = currentFile.image.uri;
         currentFileName = currentFilePath.split(/(\\|\/)/g).pop();
-        console.log(currentFile.filename, currentFileName);
 
         const isItemMarked = await checkIsItemMarked(currentFilePath);
         if(!isItemMarked){
@@ -85,11 +96,10 @@ class UnMarkedFileItems {
       var currentIndex = this.lastOffset;
       var currentFile;
       var currentFilePath;
-      while(nextTenItemslength < 10 && currentIndex < photos.length){
-        currentFile = photos.edges[currentIndex];
+      while(nextTenItems.length < 10 && currentIndex < photos.length){
+        currentFile = photos[currentIndex].node;
         currentFilePath = currentFile.image.uri;
         currentFileName = currentFilePath.split(/(\\|\/)/g).pop();
-        console.log(currentFile.filename, currentFileName);
 
         const isItemMarked = await checkIsItemMarked(currentFilePath);
         if(!isItemMarked){
@@ -104,6 +114,8 @@ class UnMarkedFileItems {
         this.lastOffset++;
       }
     }
+
+    return nextTenItems;
   }
 
   sortAndFilter(sortAndFilterParams){
@@ -120,4 +132,4 @@ class UnMarkedFileItems {
 
 }
 
-export { UnMarkedFileItems };
+export { UnmarkedFileItems };

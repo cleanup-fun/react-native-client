@@ -1,12 +1,12 @@
 
-import { DBWrapper } from "../db-wrapper";
+import { DBWrapperAbstract } from "../db-wrapper-abstract";
 
 import {
   MarkedFilesSchema
 } from "../marked-files-schema"
 
 
-class fakeDBClass extends DBWrapper {
+class fakeDBClass extends DBWrapperAbstract {
   markedTimestampIndex = {}
   fileuriIndex = {};
   constructor(config){

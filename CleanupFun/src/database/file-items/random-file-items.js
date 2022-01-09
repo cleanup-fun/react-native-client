@@ -7,7 +7,7 @@ const DEFAULT_SORTKEY = "lastAccessTimestamp";
 const DEFAULT_SORTORDER = "asc";
 
 class RandomFileItems extends FileItemsAbstract {
-  sortKey = DEFAULT_SORTKEY;
+  sortOrder = DEFAULT_SORTORDER;
   lastOffset = 0;
   constructor(){
     super();
@@ -51,7 +51,7 @@ class RandomFileItems extends FileItemsAbstract {
       }
     }
 
-    if(this.sortKey === "asc"){
+    if(this.sortOrder === "asc"){
       var currentIndex = this.lastOffset;
       var fileItem;
       while(nextTenItems < 10 && currentIndex < SAVE_MAX_NUMBER_VALUE){
@@ -63,7 +63,7 @@ class RandomFileItems extends FileItemsAbstract {
           continue;
         }
 
-        var shouldSkip = Math.floor(Math.random() * 4);
+        var shouldSkip = Math.floor(Math.random() * 2);
         if(shouldSkip === 0) {
           currentIndex++;
           continue;
@@ -84,7 +84,7 @@ class RandomFileItems extends FileItemsAbstract {
           continue;
         }
 
-        var shouldSkip = Math.floor(Math.random() * 4);
+        var shouldSkip = Math.floor(Math.random() * 2);
         if(shouldSkip === 0) {
           currentIndex--;
           continue;

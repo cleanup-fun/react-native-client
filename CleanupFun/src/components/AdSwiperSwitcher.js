@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { Alert } from "react-native";
+
 import { PleaseWait } from "./PleaseWait";
 import { Swiper } from "./Swiper/Swiper";
 import { Advertisement } from "./Advertisement/Advertisement";
@@ -26,9 +28,20 @@ function AdSwiperSwitcher({ fileItemsObject }){
         onFinish={async ()=>{
           setShowAd(false);
           setLoaded(false);
-          var nextTen = await fileItemsObject.getNextTen()
-          setFileItems(nextTen);
-          setLoaded(true);
+
+          try {
+            const nextTen = await fileItemsObject.getNextTen()
+            setFileItems(nextTen);
+            setLoaded(true);
+          }catch(e){
+            Alert.alert(
+              "Error",
+              e.message,
+              [
+                { text: "OK", onPress: () => console.log("OK Pressed") }
+              ]
+            );
+          }
         }}
       />
     )

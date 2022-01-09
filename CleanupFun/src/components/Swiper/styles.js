@@ -2,6 +2,9 @@ import {
   StyleSheet,
 } from 'react-native';
 
+const CARD_WIDTH = 320;
+const CARD_HEIGHT = 470;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -14,8 +17,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   card:{
-    width: 320,
-    height: 470,
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
     backgroundColor: '#FE474C',
     borderRadius: 5,
     shadowColor: 'rgba(0,0,0,0.5)',
@@ -94,6 +97,32 @@ const styles = StyleSheet.create({
     borderRadius:75,
     borderWidth:6,
     borderColor:'#fd267d',
+  },
+  grey:{
+    width:75,
+    height:75,
+    backgroundColor:'#fff',
+    borderRadius:75,
+    borderWidth:6,
+    borderColor:'#AAAAAA',
+  },
+
+
+  swiperCardImage: {
+    width: CARD_WIDTH,
+    height: CARD_HEIGHT,
+    resizeMode: "contain",
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  swiperCardInfo: {
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute', //Here is the trick
+    bottom: 0, //Here is the trick
+    textAlign: "left"
   }
 });
 

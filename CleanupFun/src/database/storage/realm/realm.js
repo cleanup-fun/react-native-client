@@ -1,13 +1,13 @@
 import { UNDEFINED } from "../../CONSTANTS";
 
 import Realm from "realm";
-import { DBWrapper } from "../db-wrapper";
+import { DBWrapperAbstract } from "../db-wrapper";
 
 import {
   MarkedFilesSchema
 } from "../MarkedFilesSchema"
 
-class RealmWrapper extends DBWrapper {
+class RealmWrapper extends DBWrapperAbstract {
   realmConfig = {};
   primaryKeys = {};
   realm;

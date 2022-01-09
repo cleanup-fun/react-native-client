@@ -2,14 +2,29 @@ import { getRealm } from "./realm-setup";
 import { getFakeDB } from "../storage/fake/fakeDB";
 // import { getRealm } from "../storage/realm/realm";
 
+const NEEDS_TO_BE_IMP = "needs to be implemented";
+
+const functionNames = [
+  "getNextTen",
+  "sortAndFilter"
+]
+
 class  FileItemsAbstract {
 
+  constructor(){
+    functionNames.forEach((functionName)=>{
+      if(this[functionName].toString().includes(`"${functionName} " + NEEDS_TO_BE_IMP`)){
+        throw new Error(functionName + " " + NEEDS_TO_BE_IMP);
+      }
+    })
+  }
+
   async getNextTen(){
-    throw new Error("getNextTen needs to be implemented")
+    throw new Error("getNextTen " + NEEDS_TO_BE_IMP);
   }
 
   sortAndFilter(sortAndFilterParams){
-    throw new Error("sortAndFilter needs to be implemented");
+    throw new Error("sortAndFilter " + NEEDS_TO_BE_IMP);
   }
 
   async updateFileStatus(fileuri, shouldStore){
