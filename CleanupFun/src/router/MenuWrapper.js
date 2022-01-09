@@ -28,7 +28,7 @@ function MenuWrapper({ children }){
         (currentPath === PATH_MAIN_MENU && history.length === 0) ? (
           null
         ) : (
-          <View>
+          <View style={{ "flexDirection": "row", alignItems: "center" }}>
             <Hamburger
               active={currentPath === PATH_MAIN_MENU}
               onPress={()=>{
@@ -41,7 +41,7 @@ function MenuWrapper({ children }){
                 }
               }}
             />
-            <Text>{routeItems[currentPath]?.title || "Cleanup Fun"}</Text>
+            <Text style={{ flexGrow: 1, textAlign: "center" }}>{routeItems[currentPath]?.title || "Cleanup Fun"}</Text>
           </View>
         )
       }
