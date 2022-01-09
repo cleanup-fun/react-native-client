@@ -11,7 +11,7 @@ import moment from 'moment';
 
 import { styles } from "./styles";
 
-import { translateKey } from "../../translation/translate";
+import { translateKey } from "../../global-vars/translation/translate";
 
 function DisplayDate({ markedTimestamp }){
   var momentTime = moment(markedTimestamp);

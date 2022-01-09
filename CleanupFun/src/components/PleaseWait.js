@@ -7,7 +7,7 @@ import {
 
 import { repeatedStyles } from "./repeated-styles";
 
-import { translateKey } from "../translation/translate";
+import { translateKey } from "../global-vars/translation/translate.js";
 
 /*
 

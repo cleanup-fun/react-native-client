@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { translateKey } from "../../translation/translate";
+import { translateKey } from "../../global-vars/translation/translate";
 
 import { repeatedStyles } from "../repeated-styles";
 

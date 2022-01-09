@@ -17,7 +17,7 @@ import FileViewer from "react-native-file-viewer";
 
 import { styles } from "./styles";
 
-import { translateKey } from "../../translation/translate";
+import { translateKey } from "cleanupfun/src/global-vars/translation/translate.js";
 
 function DisplayDate({ markedTimestamp }){
   var momentTime = moment(markedTimestamp);
