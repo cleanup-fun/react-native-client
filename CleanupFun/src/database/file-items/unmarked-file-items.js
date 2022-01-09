@@ -1,4 +1,5 @@
-import { UNDEFINED, SAVE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
+import { UNDEFINED, SAFE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
+
 import { PermissionsAndroid, Platform } from "react-native";
 import { FileItemsAbstract } from "./file-items-abstract";
 import CameraRoll from "@react-native-community/cameraroll";
@@ -36,7 +37,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
     var hasNextPage = true
     do{
       var tempPictureList = await CameraRoll.getPhotos({
-        first: SAVE_MAX_NUMBER_VALUE,
+        first: SAFE_MAX_NUMBER_VALUE,
         groupTypes: "SavedPhotos",
         assetType: "Photos",
       })

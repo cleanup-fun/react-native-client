@@ -1,4 +1,5 @@
-import { UNDEFINED, SAVE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
+import { UNDEFINED, SAFE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
+
 import { FileItemsAbstract } from "./file-items-abstract";
 import { getFakeDB } from "../storage/fake/fakeDB";
 // import { getRealm } from "../storage/realm/realm";
@@ -13,7 +14,7 @@ class RandomFileItems extends FileItemsAbstract {
     super();
   }
   async getNextTen(){
-    if(SAVE_MAX_NUMBER_VALUE === this.lastOffset){
+    if(SAFE_MAX_NUMBER_VALUE === this.lastOffset){
       return [];
     }
 
@@ -54,7 +55,7 @@ class RandomFileItems extends FileItemsAbstract {
     if(this.sortOrder === "asc"){
       var currentIndex = this.lastOffset;
       var fileItem;
-      while(nextTenItems < 10 && currentIndex < SAVE_MAX_NUMBER_VALUE){
+      while(nextTenItems < 10 && currentIndex < SAFE_MAX_NUMBER_VALUE){
         fileItem = await createARandomFileItem(currentIndex);
 
         const isItemMarked = await checkIsItemMarked(fileItem);
@@ -74,7 +75,7 @@ class RandomFileItems extends FileItemsAbstract {
         this.lastOffset++;
       }
     }else{
-      var currentIndex = SAVE_MAX_NUMBER_VALUE - this.lastOffset;
+      var currentIndex = SAFE_MAX_NUMBER_VALUE - this.lastOffset;
       while(nextTenItems.length < 10 && currentIndex >= 0){
         fileItem = await createARandomFileItem(currentIndex);
 
