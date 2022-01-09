@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+import { useNavigator } from "cleanupfun/src/global-vars/navigator";
+import { PATH_MAIN_MENU } from "cleanupfun/src/router/route-constants";
+
 import { Alert } from "react-native";
 
 import { PleaseWait } from "./PleaseWait";
@@ -8,6 +11,8 @@ import { Advertisement } from "./Advertisement/Advertisement";
 
 // fileItems is FileItemsAbstract see /src/database/file-items-abstract.js
 function AdSwiperSwitcher({ fileItemsObject }){
+  const navigator = useNavigator();
+
   const [loaded, setLoaded] = useState(false);
   const [showAd, setShowAd] = useState(true);
   const [fileItems, setFileItems] = useState([]);
@@ -74,7 +79,7 @@ function AdSwiperSwitcher({ fileItemsObject }){
       }}
       onNoMoreFiles={()=>{
         console.log("Finished");
-        throw new Error("all done");
+        navigator.to(PATH_MAIN_MENU)
       }}
     />
   )
