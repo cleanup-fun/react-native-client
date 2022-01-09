@@ -13,6 +13,7 @@ import moment from 'moment';
 
 import * as mime from 'react-native-mime-types';
 import FileOpener from 'react-native-file-opener';
+import FileViewer from "react-native-file-viewer";
 
 import { styles } from "./styles";
 
@@ -45,10 +46,28 @@ function SwiperCardImage({fileItem}){
     <Card
       style={styleList}
     >
-      <Image
-        style={[styles.swiperCardImage]}
-        source={{ uri: fileuri }}
-      />
+      <TouchableOpacity
+        style={{
+          position: 'absolute',
+          alignSelf: 'center',
+        }}
+        onPress={()=>{
+          const path = FileViewer.open(fileItem.fileuri) // absolute-path-to-my-local-file.
+            .then(() => {
+              // success
+              console.log("successfully opened the file")
+            })
+            .catch((error) => {
+              // error
+              console.log("failed to open the file")
+            });
+        }}
+      >
+        <Image
+          style={[styles.swiperCardImage]}
+          source={{ uri: fileuri }}
+        />
+      </TouchableOpacity>
       <TouchableOpacity
         style={[
           styles.button,
@@ -83,7 +102,7 @@ function SwiperCardImage({fileItem}){
         />
       </TouchableOpacity>
       <View
-        style={[styles.swiperCardInfo]}
+        style={[styles.swiperCardInfo, ]}
       >
         <Text>{translateKey("SWIPERCARD_FILE_NAME")}: {fileItem.filename}</Text>
         <Text>{translateKey("SWIPERCARD_FILE_URI")}: {fileItem.fileuri}</Text>

@@ -112,8 +112,6 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
     resizeMode: "contain",
-    position: 'absolute',
-    alignSelf: 'center',
   },
   swiperCardInfo: {
     width: '100%',
