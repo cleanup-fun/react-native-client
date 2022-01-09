@@ -1,5 +1,9 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/Advertisement/Ads/AdMobAd.js"
+const logger = new KeyedLogger(FILE_NAME)
 
 import React from 'react';
+
 import {
   Text,
   View,
@@ -14,7 +18,7 @@ function AdMobAd({onFinish}){
     <TouchableOpacity
       style={repeatedStyles.centeringContainer}
       onPress={() => {
-        console.log("clicked");
+        logger.log("clicked");
         onFinish && onFinish()
       }}
     >

@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/PleaseWait.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React, { useState, useEffect } from 'react';
 import {
   Text,
@@ -21,6 +25,7 @@ function PleaseWait({ onExit }){
 
   useEffect(() => {
     const timeout = setTimeout(()=>{
+      logger.warn("timed out");
       setTimedOut(true);
     }, 10 * 1000)
     return () => {

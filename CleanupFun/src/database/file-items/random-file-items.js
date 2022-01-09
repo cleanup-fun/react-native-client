@@ -1,5 +1,10 @@
 import { UNDEFINED, SAFE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
 
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/database/file-items/marked-file-items"
+const logger = new KeyedLogger(FILE_NAME)
+
+
 import { FileItemsAbstract } from "./file-items-abstract";
 import { getFakeDB } from "../storage/fake/fakeDB";
 // import { getRealm } from "../storage/realm/realm";
@@ -31,7 +36,7 @@ class RandomFileItems extends FileItemsAbstract {
 
       var indexString = index.toString(32);
 
-      console.log("index:", index, indexString)
+      logger.log("index:", index, indexString)
       var markedTimestamp = Date.now();
       var filename = indexString + ".png";
       var fileuri = "file://" + indexString + "/" + indexString + "/" + filename;
@@ -105,7 +110,7 @@ class RandomFileItems extends FileItemsAbstract {
       case "asc": this.sortOrder = "asc"; break;
       case "desc": this.sortOrder = "desc"; break;
       default: {
-        console.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
+        logger.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
         this.sortOrder = DEFAULT_SORTORDER;
         break;
       }

@@ -1,4 +1,8 @@
 
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/database/stiorage/fare/fakeDB"
+const logger = new KeyedLogger(FILE_NAME)
+
 import { DBWrapperAbstract } from "../db-wrapper-abstract";
 
 import {
@@ -11,7 +15,7 @@ class fakeDBClass extends DBWrapperAbstract {
   fileuriIndex = {};
   constructor(config){
     super();
-    console.log("fake db config")
+    logger.log("fake db config")
   }
 
   async setup(){

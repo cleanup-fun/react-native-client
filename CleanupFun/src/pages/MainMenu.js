@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/pages/MainMenu.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
@@ -30,7 +34,7 @@ const MainMenu = () => {
             <TouchableOpacity
               key={item.key}
               onPress={()=>{
-                console.log("pressed a menu item: ", item.path);
+                logger.log("pressed a menu item: ", item.path);
                 navigate(item.path)
               }}
             >

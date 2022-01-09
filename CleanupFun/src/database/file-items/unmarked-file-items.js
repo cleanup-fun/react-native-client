@@ -1,5 +1,9 @@
 import { UNDEFINED, SAFE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
 
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/database/file-items/unmarked-file-items"
+const logger = new KeyedLogger(FILE_NAME)
+
 import { PermissionsAndroid, Platform } from "react-native";
 import { FileItemsAbstract } from "./file-items-abstract";
 import CameraRoll from "@react-native-community/cameraroll";
@@ -59,7 +63,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
     ]);
 
     if(photos.length <= this.lastOffset){
-      console.log("no more photos available");
+      logger.log("no more photos available");
       return [];
     }
 
@@ -68,7 +72,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
     async function checkIsItemMarked(fileuri){
       return await db.hasItem("fileuri", fileuri);
     }
-    console.log("last is oldest?", photos[photos.length - 1].node.timestamp < photos[0].node.timestamp)
+    logger.log("last is oldest?", photos[photos.length - 1].node.timestamp < photos[0].node.timestamp)
 
     if(this.sortOrder === "asc"){
       var currentIndex = photos.length - 1 - this.lastOffset;
@@ -77,7 +81,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
       var currentFileName;
       while(nextTenItems.length < 10 && currentIndex >= 0){
         currentFile = photos[currentIndex].node;
-        console.log("currentFile:", currentFile)
+        logger.log("currentFile:", currentFile)
         currentFilePath = currentFile.image.uri;
         currentFileName = currentFilePath.split(/(\\|\/)/g).pop();
 
@@ -124,7 +128,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
       case "asc": this.sortOrder = "asc"; break;
       case "desc": this.sortOrder = "desc"; break;
       default: {
-        console.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
+        logger.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
         this.sortOrder = DEFAULT_SORTORDER;
         break;
       }

@@ -1,5 +1,9 @@
 import { UNDEFINED } from "../../CONSTANTS";
 
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/Swiper/Swiper.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React from "react";
 import { Card } from 'react-native-card-stack-swiper';
 import {
@@ -40,7 +44,7 @@ function SwiperCardImage({fileItem}){
   ])
 
   const fileuri = fileItem.fileuri;
-  console.log(fileuri);
+  logger.log( fileuri);
 
   return (
     <Card
@@ -55,11 +59,11 @@ function SwiperCardImage({fileItem}){
           const path = FileViewer.open(fileItem.fileuri) // absolute-path-to-my-local-file.
             .then(() => {
               // success
-              console.log("successfully opened the file")
+              logger.log("successfully opened the file")
             })
             .catch((error) => {
               // error
-              console.log("failed to open the file")
+              logger.log("failed to open the file")
             });
         }}
       >
@@ -80,15 +84,15 @@ function SwiperCardImage({fileItem}){
         ]}
         onPress={() => {
           var mimetype = mime.lookup(fileItem.fileuri)
-          console.log("mimetype:", mimetype)
-          console.log("FileOpener:", FileOpener)
+          logger.log("mimetype:", mimetype)
+          logger.log("FileOpener:", FileOpener)
           FileOpener.open(
             fileItem.fileuri,
             mimetype
           ).then(()=>{
-            console.log("successful open")
+            logger.log("successful open")
           }, ()=>{
-            console.log("failed open")
+            logger.log("failed open")
           })
         }}
       >

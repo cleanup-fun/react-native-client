@@ -1,5 +1,9 @@
 import { UNDEFINED } from "../../CONSTANTS";
 
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/database/storage/realm/realm.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import Realm from "realm";
 import { DBWrapperAbstract } from "../db-wrapper";
 
@@ -29,7 +33,7 @@ class RealmWrapper extends DBWrapperAbstract {
       newMarkedFile = realm.create("MarkedFile", newMarkedFile)
     })
 
-    console.log(newMarkedFile)
+    logger.log(newMarkedFile)
   }
 
   async updateItem(oldValue, newValue){

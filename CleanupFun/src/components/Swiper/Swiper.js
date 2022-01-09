@@ -1,4 +1,9 @@
 import { UNDEFINED } from "../../CONSTANTS";
+
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/Swiper/Swiper.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React, { useEffect, useState, useRef } from 'react';
 import {
   Text,
@@ -39,11 +44,11 @@ function Swiper({ fileItems, onLoadMoreCards, onNoMoreFiles, onSwipedRight, onSw
         }}
         verticalSwipe={false}
         onSwipedRight={(index) => {
-          console.log('onSwipedRight, right good')
+          logger.log('onSwipedRight, right good')
           onSwipedRight && onSwipedRight(index);
         }}
         onSwipedLeft={(index) => {
-          console.log('onSwipedLeft, left bad')
+          logger.log('onSwipedLeft, left bad')
           onSwipedLeft && onSwipedLeft(index);
         }}
       >

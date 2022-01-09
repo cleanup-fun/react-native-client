@@ -20,6 +20,7 @@
     "react-native-file-opener": "^0.2.0",
     "react-native-file-viewer": "^2.1.5",
     "react-native-hamburger": "^0.0.2",
+    "react-native-logs": "^4.0.0",
     "react-native-mime-types": "^2.3.0",
     "react-router-native": "^6.2.1"
   },

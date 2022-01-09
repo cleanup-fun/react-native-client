@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/Advertisement/checks/checkConnectivity.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import {
   Platform
 } from 'react-native';
@@ -7,14 +11,14 @@ import NetInfo from "@react-native-community/netinfo";
 async function checkConnectivity(){
   var isConnected
   const netInfoState = await NetInfo.fetch();
-  console.log("Connection type", netInfoState.type);
-  console.log("Is connected?", netInfoState.isConnected);
+  logger.log("Connection type", netInfoState.type);
+  logger.log("Is connected?", netInfoState.isConnected);
 
   if (netInfoState.isConnected) {
-    console.log("You are online!");
+    logger.log("You are online!");
     return true;
   } else {
-    console.log("You are offline!");
+    logger.log("You are offline!");
     return false
   }
 }

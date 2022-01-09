@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/components/AdSwiperSwitcher.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React, { useState, useEffect } from "react";
 
 import { useNavigator } from "cleanupfun/src/global-vars/navigator";
@@ -43,7 +47,7 @@ function AdSwiperSwitcher({ fileItemsObject }){
               "Error",
               e.message,
               [
-                { text: "OK", onPress: () => console.log("OK Pressed") }
+                { text: "OK", onPress: () => logger.log("OK Pressed") }
               ]
             );
           }
@@ -78,7 +82,7 @@ function AdSwiperSwitcher({ fileItemsObject }){
         setShowAd(true);
       }}
       onNoMoreFiles={()=>{
-        console.log("Finished");
+        logger.log("Finished");
         navigator.to(PATH_MAIN_MENU)
       }}
     />

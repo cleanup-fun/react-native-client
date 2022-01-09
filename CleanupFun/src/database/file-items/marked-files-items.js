@@ -1,3 +1,8 @@
+
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/database/file-items/marked-file-items"
+const logger = new KeyedLogger(FILE_NAME)
+
 import { FileItemsAbstract } from "./file-items-abstract";
 import { getRealm } from "./realm-setup";
 import { UNDEFINED } from "../CONSTANTS";
@@ -47,7 +52,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
       case "filename": this.sortKey = "filename"; break;
       case "markedTimestamp": this.sortKey = "markedTimestamp"; break;
       default: {
-        console.log("missing or invalid sort key:", sortAndFilterParams.sortKey)
+        logger.log("missing or invalid sort key:", sortAndFilterParams.sortKey)
         this.sortKey = DEFAULT_SORTKEY;
         break;
       }
@@ -57,7 +62,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
       case "asc": this.sortOrder = "asc"; break;
       case "desc": this.sortOrder = "desc"; break;
       default: {
-        console.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
+        logger.log("missing or invalid sort order:", sortAndFilterParams.sortOrder)
         this.sortOrder = DEFAULT_SORTORDER;
         break;
       }
@@ -68,7 +73,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
       case false: this.shouldStoreFilter = false;
       case UNDEFINED: this.shouldStoreFilter = UNDEFINED
       default: {
-        console.log("invalid should store filter:", shouldStoreFilter.shouldStore)
+        logger.log("invalid should store filter:", shouldStoreFilter.shouldStore)
         this.shouldStoreFilter = DEFAULT_SHOULDSTORE_FILTER;
         break;
       }
@@ -77,7 +82,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
     if(typeof shouldStoreFilter.autocomplete === "string" && shouldStoreFilter.autocomplete !== ""){
       this.autocompleteFilter = shouldStoreFilter.autocomplete
     } else {
-      console.log("missing or invalid autocomplete filter:", shouldStoreFilter.autocomplete);
+      logger.log("missing or invalid autocomplete filter:", shouldStoreFilter.autocomplete);
       this.autocompleteFilter = DEFAULT_AUTOCOMPLETE_FILTER;
     }
   }

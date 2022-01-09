@@ -1,3 +1,15 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/Main.js"
+const logger = new KeyedLogger(FILE_NAME)
+
+console.log("================================")
+console.log("================================")
+console.log("================================")
+logger.log("test log")
+logger.info("test info")
+logger.warn("test warn")
+logger.error("test error")
+
 
 import React, {useState} from "react";
 

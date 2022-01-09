@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/pages/PaymentPage.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
@@ -16,8 +20,8 @@ function MenuWrapper({ children }){
   const currentPath = navigator.currentPath;
   const history = navigator.history;
 
-  console.log("current path:", currentPath)
-  console.log("history:", history);
+  logger.log("current path:", currentPath)
+  logger.log("history:", history);
   return (
     <View style={{flex: 1}}>
       {
@@ -29,10 +33,10 @@ function MenuWrapper({ children }){
               active={currentPath === PATH_MAIN_MENU}
               onPress={()=>{
                 if(currentPath === PATH_MAIN_MENU){
-                  console.log("go back")
+                  logger.log("go back")
                   navigator.back()
                 } else {
-                  console.log("go to main menu");
+                  logger.log("go to main menu");
                   navigator.to(PATH_MAIN_MENU)
                 }
               }}

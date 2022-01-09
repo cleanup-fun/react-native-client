@@ -1,3 +1,7 @@
+import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "/pages/PaymentPage.js"
+const logger = new KeyedLogger(FILE_NAME)
+
 import React, { useContext } from 'react';
 import {
   Text,
@@ -18,7 +22,7 @@ function PaymentPage(){
     <TouchableOpacity
       style={repeatedStyles.centeringContainer}
       onPress={() => {
-        console.log("clicked");
+        logger.log("clicked");
         navigate(PATH_MAIN_MENU)
       }}
     >

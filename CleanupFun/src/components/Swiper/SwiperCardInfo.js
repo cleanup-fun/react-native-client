@@ -1,5 +1,8 @@
 import { UNDEFINED } from "../../CONSTANTS";
 
+import { logger } from "cleanupfun/src/global-vars/logger";
+const FILE_NAME = "SwiperCardInfo"
+
 import React from "react";
 import { Card } from 'react-native-card-stack-swiper';
 import {
@@ -33,7 +36,7 @@ function SwiperCard({fileItem}){
     )
   ])
 
-  console.log("styleList:", styleList);
+  logger.log(FILE_NAME, "styleList:", styleList);
 
   return (
     <Card
