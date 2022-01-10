@@ -8,23 +8,12 @@ import { Card } from 'react-native-card-stack-swiper';
 import {
   Text,
 } from 'react-native';
-import moment from 'moment';
-// https://www.npmjs.com/package/react-moment
-// https://momentjs.com/docs/#/displaying/
+
+import { TranslateableMoment } from "../Reused/TranslateableMoment";
 
 import { styles } from "./styles";
 
 import { translateKey } from "../../global-vars/translation/translate";
-
-function DisplayDate({ markedTimestamp }){
-  var momentTime = moment(markedTimestamp);
-  const now = Date.now();
-  const WeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-  if(now - markedTimestamp < WeekInMilliseconds){
-    return momentTime.fromNow();
-  }
-  return momentTime.format("dddd, MMMM Do YYYY, h:mm:ss a");
-}
 
 function SwiperCard({fileItem}){
   const styleList = [styles.card].concat([
@@ -44,7 +33,7 @@ function SwiperCard({fileItem}){
     >
       <Text>{translateKey("SWIPERCARD_FILE_NAME")}: {fileItem.filename}</Text>
       <Text>{translateKey("SWIPERCARD_FILE_URI")}: {fileItem.fileuri}</Text>
-      <Text>{translateKey("SWIPERCARD_MARKED_TIMESTAMP")}: <DisplayDate markedTimestamp={fileItem.markedTimestamp} /></Text>
+      <Text>{translateKey("SWIPERCARD_MARKED_TIMESTAMP")}: <TranslateableMoment timestamp={fileItem.markedTimestamp} /></Text>
       <Text>{translateKey("SWIPERCARD_STORED_STATUS")}: {fileItem.shouldStore === UNDEFINED ? "New" : fileItem.shouldStore === true ? "Should Store" : "Saved"}</Text>
     </Card>
   )

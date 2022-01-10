@@ -12,8 +12,8 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import moment from 'moment';
-// https://momentjs.com/docs/#/displaying/
+
+import { TranslateableMoment } from "../Reused/TranslateableMoment";
 
 import * as mime from 'react-native-mime-types';
 import FileOpener from 'react-native-file-opener';
@@ -22,16 +22,6 @@ import FileViewer from "react-native-file-viewer";
 import { styles } from "./styles";
 
 import { translateKey } from "cleanupfun/src/global-vars/translation/translate.js";
-
-function DisplayDate({ markedTimestamp }){
-  var momentTime = moment(markedTimestamp);
-  const now = Date.now();
-  const WeekInMilliseconds = 7 * 24 * 60 * 60 * 1000;
-  if(now - markedTimestamp < WeekInMilliseconds){
-    return momentTime.fromNow();
-  }
-  return momentTime.format("dddd, MMMM Do YYYY, h:mm:ss a");
-}
 
 function SwiperCardImage({fileItem}){
   const styleList = [styles.card].concat([
@@ -110,7 +100,7 @@ function SwiperCardImage({fileItem}){
       >
         <Text>{translateKey("SWIPERCARD_FILE_NAME")}: {fileItem.filename}</Text>
         <Text>{translateKey("SWIPERCARD_FILE_URI")}: {fileItem.fileuri}</Text>
-        <Text>{translateKey("SWIPERCARD_MARKED_TIMESTAMP")}: <DisplayDate markedTimestamp={fileItem.markedTimestamp} /></Text>
+        <Text>{translateKey("SWIPERCARD_MARKED_TIMESTAMP")}: <TranslateableMoment timestamp={fileItem.markedTimestamp} /></Text>
         <Text>{translateKey("SWIPERCARD_STORED_STATUS")}: {fileItem.shouldStore === UNDEFINED ? "New" : fileItem.shouldStore === true ? "Should Store" : "Saved"}</Text>
       </View>
     </Card>
