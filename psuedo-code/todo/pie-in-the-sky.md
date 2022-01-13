@@ -62,3 +62,6 @@
       - if(log(currentTurn) / log(4) % 1 === 0) - Switch
 
   - Long term maybe supporting more than 2 parties
+
+- use a non recursive sort
+  - there is a max callstack
