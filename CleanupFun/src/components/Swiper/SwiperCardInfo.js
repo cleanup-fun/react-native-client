@@ -1,4 +1,4 @@
-import { UNDEFINED } from "../../CONSTANTS";
+import { UNDEFINED } from "cleanupfun/src/constants";
 
 import { logger } from "cleanupfun/src/global-vars/logger";
 const FILE_NAME = "SwiperCardInfo"
