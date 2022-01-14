@@ -190,7 +190,7 @@ module.exports = {
     "no-sequences": 1, // disallow use of comma operator
     "no-unused-expressions": 0, // disallow usage of expressions in statement position
     "no-useless-escape": 1, // disallow escapes that don"t have any effect in literals
-    "no-void": 1, // disallow use of void operator (off by default)
+    // "no-void": 1, // disallow use of void operator (off by default)
     "no-warning-comments": 0, // disallow usage of configurable warning terms in comments": 1,                        // e.g. TODO or FIXME (off by default)
     "no-with": 1, // disallow use of the with statement
     radix: 1, // require use of the second argument for parseInt() (off by default)
