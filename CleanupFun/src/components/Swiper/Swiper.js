@@ -19,7 +19,14 @@ import { LoadMoreCards } from "./LoadMoreCards";
 import { SwiperCardImage } from "./SwiperCardImage"
 
 
-function Swiper({ fileItems, onLoadMoreCards, onNoMoreFiles, onSwipedRight, onSwipedLeft }){
+function Swiper({
+  fileItems,
+  onLoadMoreCards,
+  hasMoreItems,
+  onNoMoreFiles,
+  onSwipedRight,
+  onSwipedLeft
+}){
   const swiperRef = useRef();
 
   if(fileItems.length === 0){
@@ -54,10 +61,12 @@ function Swiper({ fileItems, onLoadMoreCards, onNoMoreFiles, onSwipedRight, onSw
       >
         {
           fileItems.map((fileItem)=>{
-            return ( <SwiperCardImage
-              key={fileItem.fileuri}
-              fileItem={fileItem}
-            /> );
+            return (
+              <SwiperCardImage
+                key={fileItem.shouldStore + "-" + fileItem.fileuri}
+                fileItem={fileItem}
+              />
+            );
           })
         }
       </CardStack>

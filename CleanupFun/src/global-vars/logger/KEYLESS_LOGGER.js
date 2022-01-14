@@ -2,8 +2,8 @@
 import { coloredLogger } from "./coloredLogger";
 
 import {
-  keylessLoggerConfig
-} from "./keyless-logger-config"
+  keylessLoggerConfig,
+} from "./keyless-logger-config";
 
 const {
   SINGLE_ARG_WARN,
@@ -16,22 +16,21 @@ const {
   BLACK_LIST_ERROR_MESSAGE,
   whitelist,
   blacklist,
-  shouldShortenKeyForDisplay
-} = keylessLoggerConfig
+} = keylessLoggerConfig;
 
 function validateKey(key){
   if(typeof key !== "string"){
-    throw new Error("the logger key must be a string, got: " + JSON.stringify(key))
+    throw new Error("the logger key must be a string, got: " + JSON.stringify(key));
   }
   if(WHITE_LIST_USE && !(whitelist.some((test)=>(runTest(test, key))))){
     if(WHITE_LIST_WARN){
-      coloredLogger.warn("A key not found in the whitelist tried to log: ", key)
+      coloredLogger.warn("A key not found in the whitelist tried to log: ", key);
     }
-    throw WHITE_LIST_ERROR_MESSAGE
+    throw WHITE_LIST_ERROR_MESSAGE;
   }
   if(BLACK_LIST_USE && blacklist.some((test)=>(runTest(test, key)))){
     if(BLACK_LIST_WARN){
-      coloredLogger.warn("A key found in the blacklist tried to log: ", key)
+      coloredLogger.warn("A key found in the blacklist tried to log: ", key);
     }
     throw BLACK_LIST_ERROR_MESSAGE
   }
@@ -43,7 +42,7 @@ function runTest(test, key){
     return test === key;
   }
   if(test instanceof RegExp){
-    return test.test(key)
+    return test.test(key);
   }
   throw new Error("invalid test: " + JSON.stringify(test));
 }

@@ -1,6 +1,6 @@
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
-const FILE_NAME = "/components/AdSwiperSwitcher.js"
-const logger = new KeyedLogger(FILE_NAME)
+const FILE_NAME = "/components/AdSwiperSwitcher.js";
+const logger = new KeyedLogger(FILE_NAME);
 
 import React, { useState, useEffect } from "react";
 
@@ -14,7 +14,7 @@ import { Swiper } from "./Swiper/Swiper";
 import { Advertisement } from "./Advertisement/Advertisement";
 
 // fileItems is FileItemsAbstract see /src/database/file-items-abstract.js
-function AdSwiperSwitcher({ fileItemsObject }){
+export function AdSwiperSwitcher({ fileItemsObject }){
   const navigator = useNavigator();
 
   const [loaded, setLoaded] = useState(false);
@@ -47,13 +47,13 @@ function AdSwiperSwitcher({ fileItemsObject }){
               "Error",
               e.message,
               [
-                { text: "OK", onPress: () => logger.log("OK Pressed") }
+                { text: "OK", onPress: () => logger.log("OK Pressed") },
               ]
             );
           }
         }}
       />
-    )
+    );
   }
 
   return (
@@ -62,7 +62,7 @@ function AdSwiperSwitcher({ fileItemsObject }){
 
       onSwipedRight={(index)=>{
         // right good, will save
-        fileItemsObject.updateFileStatus(fileItems[index].fileuri, false)
+        fileItemsObject.updateFileStatus(fileItems[index].fileuri, false);
         var newCards = [...fileItems];
         newCards[index].shouldStore = false;
         // hopefully it doesn't reset the cards
@@ -71,7 +71,7 @@ function AdSwiperSwitcher({ fileItemsObject }){
 
       onSwipedLeft={(index)=>{
         // left bad, will store
-        fileItemsObject.updateFileStatus(fileItems[index].fileuri, true)
+        fileItemsObject.updateFileStatus(fileItems[index].fileuri, true);
         var newCards = [...fileItems];
         newCards[index].shouldStore = true;
         // hopefully it doesn't reset the cards
@@ -83,13 +83,8 @@ function AdSwiperSwitcher({ fileItemsObject }){
       }}
       onNoMoreFiles={()=>{
         logger.log("Finished");
-        navigator.to(PATH_MAIN_MENU)
+        navigator.to(PATH_MAIN_MENU);
       }}
     />
-  )
-
-
+  );
 }
-
-
-export { AdSwiperSwitcher };

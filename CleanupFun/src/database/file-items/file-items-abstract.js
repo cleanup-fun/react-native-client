@@ -1,6 +1,3 @@
-import { getRealm } from "./realm-setup";
-import { getFakeDB } from "../storage/fake/fakeDB";
-// import { getRealm } from "../storage/realm/realm";
 
 const NEEDS_TO_BE_IMP = "needs to be implemented";
 

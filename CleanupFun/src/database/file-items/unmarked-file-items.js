@@ -1,8 +1,8 @@
 import { UNDEFINED, SAFE_MAX_NUMBER_VALUE } from "../../CONSTANTS";
 
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
-const FILE_NAME = "/database/file-items/unmarked-file-items"
-const logger = new KeyedLogger(FILE_NAME)
+const FILE_NAME = "/database/file-items/unmarked-file-items";
+const logger = new KeyedLogger(FILE_NAME);
 
 import { PermissionsAndroid, Platform } from "react-native";
 import { FileItemsAbstract } from "./file-items-abstract";
