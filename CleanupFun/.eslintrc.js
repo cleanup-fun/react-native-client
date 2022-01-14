@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  extends: ["./editor/react-native-community-no-prettier.js"],
 };
