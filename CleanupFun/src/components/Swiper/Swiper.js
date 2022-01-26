@@ -16,7 +16,7 @@ import CardStack from 'react-native-card-stack-swiper';
 import { styles } from "./styles";
 import { NoMoreFiles } from "./NoMoreFiles"
 import { LoadMoreCards } from "./LoadMoreCards";
-import { SwiperCardImage } from "./SwiperCardImage"
+import { SwiperCard } from "./SwiperCard"
 
 
 function Swiper({
@@ -62,7 +62,7 @@ function Swiper({
         {
           fileItems.map((fileItem)=>{
             return (
-              <SwiperCardImage
+              <SwiperCard
                 key={fileItem.shouldStore + "-" + fileItem.fileuri}
                 fileItem={fileItem}
               />
