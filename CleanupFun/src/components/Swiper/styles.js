@@ -108,10 +108,9 @@ const styles = StyleSheet.create({
   },
 
 
-  swiperCardImage: {
+  swiperCardItem: {
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
-    resizeMode: "contain",
   },
   swiperCardInfo: {
     width: '100%',

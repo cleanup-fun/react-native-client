@@ -9,7 +9,7 @@ export function ImageItem({ fileuri }){
   console.log("displaying image:", fileuri);
   return (
     <Image
-      style={[styles.swiperCardItem]}
+      style={[styles.swiperCardItem, { resizeMode: "contain" }]}
       source={{ uri: fileuri }}
     />
   );
