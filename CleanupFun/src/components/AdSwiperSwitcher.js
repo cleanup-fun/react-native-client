@@ -14,7 +14,7 @@ import { Swiper } from "./Swiper/Swiper";
 import { Advertisement } from "./Advertisement/Advertisement";
 
 // fileItems is FileItemsAbstract see /src/database/file-items-abstract.js
-export function AdSwiperSwitcher({ fileItemsObject }){
+export function AdSwiperSwitcher({ fileItemsObject, onExit }){
   const navigator = useNavigator();
 
   const [loaded, setLoaded] = useState(false);
@@ -43,11 +43,20 @@ export function AdSwiperSwitcher({ fileItemsObject }){
             setFileItems(nextTen);
             setLoaded(true);
           }catch(e){
+            if(/user canceled the document picker/.test(e.message)){
+              return onExit();
+            }
             Alert.alert(
               "Error",
               e.message,
               [
-                { text: "OK", onPress: () => logger.log("OK Pressed") },
+                {
+                  text: "OK",
+                  onPress: () => {
+                    logger.log("OK Pressed");
+                    onExit();
+                  }
+                },
               ]
             );
           }
