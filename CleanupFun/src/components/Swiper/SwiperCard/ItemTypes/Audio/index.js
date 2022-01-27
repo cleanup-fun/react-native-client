@@ -8,7 +8,6 @@ import TrackPlayer from "react-native-track-player";
 import { addTrack } from "./utils/addTrack";
 import { stopTrackPlayer, skipTrackPlayer } from "./utils/stopskip";
 
-import { usePrevious }  from "cleanupfun/src/utils/usePrevious";
 import { styles as audioStyles } from "./styles";
 import { styles as swiperStyles } from "../../../styles";
 
