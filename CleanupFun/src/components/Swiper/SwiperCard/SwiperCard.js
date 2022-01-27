@@ -15,6 +15,8 @@ import {
 } from "./ItemTypes";
 
 const textTest = /^text\//;
+const videoTest = /^video\//;
+const audioTest = /^audio\//;
 const imageTest = /^image\//;
 
 export function SwiperCard({ fileItem, active }){
@@ -38,6 +40,16 @@ export function SwiperCard({ fileItem, active }){
       {
         textTest.test(mimetype) ? (
           <TextItem
+            fileuri={fileuri}
+            active={active}
+          />
+        ) : videoTest.test(mimetype) ? (
+          <VideoItem
+            fileuri={fileuri}
+            active={active}
+          />
+        ) : audioTest.test(mimetype) ? (
+          <AudioItem
             fileuri={fileuri}
             active={active}
           />
