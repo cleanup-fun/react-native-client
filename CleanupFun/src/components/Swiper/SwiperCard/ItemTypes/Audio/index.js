@@ -9,8 +9,8 @@ import { addTrack } from "./utils/addTrack";
 import { stopTrackPlayer, skipTrackPlayer } from "./utils/stopskip";
 
 import { usePrevious }  from "cleanupfun/src/utils/usePrevious";
-
-import { styles } from "./styles";
+import { styles as audioStyles } from "./styles";
+import { styles as swiperStyles } from "../../../styles";
 
 import { MutedContext } from "cleanupfun/src/global-vars/muted";
 
@@ -33,9 +33,6 @@ export function AudioItemEmpty(){
 }
 
 export function AudioItem({ fileuri, active }){
-  const {
-    playerMaxView,
-  } = styles;
 
   const prevActiveRef = useRef(false);
   const [muted] = useContext(MutedContext);
@@ -110,7 +107,7 @@ export function AudioItem({ fileuri, active }){
   }, [active, itemIndex, muted]);
 
   return (
-    <View style={playerMaxView}>
+    <View style={[swiperStyles.swiperCardItem, { justifyContent: "center" }]}>
       <PositionSlider />
       <SeekPausePlay />
     </View>

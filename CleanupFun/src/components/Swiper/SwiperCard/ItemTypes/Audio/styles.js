@@ -18,22 +18,6 @@ const circleStyle = (heightWidth) => ({
 });
 
 export const styles = StyleSheet.create({
-  playerMaxView: {
-    ...flexStyles,
-    backgroundColor: "#a3a3c2",
-    paddingHorizontal: 5,
-    height: "100%",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-  },
   topSection: {
     ...flexStyles,
     flex: 5,
@@ -43,16 +27,16 @@ export const styles = StyleSheet.create({
     paddingTop: 10,
   },
   progrsBarSection: {
-    ...flexStyles,
     alignItems: "center",
     justifyContent: "center",
     display: "flex",
     flexDirection: "row",
   },
   buttonsSection: {
-    ...flexStyles,
-    flex: 2,
     flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "stretch",
+    display: "flex",
   },
   buttonsCol: {
     flex: 1,
