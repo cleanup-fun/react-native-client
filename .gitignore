@@ -57,4 +57,4 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
+CleanupFun/ios/Pods/
