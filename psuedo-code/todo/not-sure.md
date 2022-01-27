@@ -15,3 +15,5 @@
 - Sorting by string
   - with list [ "ac", "c", "abb" ] it normally would sort to be ["abb", "ac", "c"]
     - do I want to sort it by length first? ["c", "ac", "abb"]
+
+- Putting the webhook auth token in an environment variable

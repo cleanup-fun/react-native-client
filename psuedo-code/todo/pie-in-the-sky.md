@@ -11,6 +11,35 @@
       - ask everyone else for the headers to make sure all the headers are the same
       - download one chunk from each person
 
+- Peer to Peer filesharing
+  - Show list of visible peers
+    - Allow yourself to become visible or stay invisible
+      - Before Becoming visible, the app asks if you want any files invisible
+        - The individual has the ability to sort and filter
+        - Select all from the current sort and filter
+        - Select individual items from the current sort and filter
+        - Set whether the image is visible or invisible
+  - Request Connection with peer
+    - On Connect
+      - Display Peers Files
+        - File Name
+        - FileType
+        - File Size
+        - Whether you already have a copy
+          - based on first byte, last byte, hash and filesize
+      - Show you'r own files
+        - Little Preview
+        - File Name
+        - File Type
+        - File Size
+        - Whether the peer already has a copy
+        - Whether you want to allow the peer to see it or not
+    - Ask to download a file from a peer
+      - peer can say no
+    - Offer a file to a peer
+      - peer can say no
+    - If the peer says yes to download or offer
+      - Download/upload
 
 - Allow the database to store arbitrary Bytes
   - possibly with the ability to stream it

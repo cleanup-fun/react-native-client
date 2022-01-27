@@ -1,8 +1,3 @@
-# Necessary for launch
-
-- Setup Admob Ads
-
-- Create a no internet ad?
 
 - In App purchases
   - User must be able to login/register
@@ -16,5 +11,14 @@
   - not sure if the payment reciept comes from the user or directly from apple/google
 
 
-
-- Inapp Purcha
+## Server
+- User
+  - Create a user
+    - send user verification token to users email or mobile phone
+  - Verify a user
+  - User logs in
+  - User Logs out
+- Payment - requires user
+  - New Payment
+  - New Subscription
+  - Canceled Subscription

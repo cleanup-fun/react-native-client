@@ -40,3 +40,9 @@
   - The user has to say "READY" on both the computer and the device before it starts
 
 - Allow the person to "swipe" off the main menu
+
+
+
+- Allow the person to choose a directory to cleanup
+  - Can go deep or shallow
+  - Will tell the user if any directories or files could not be read
