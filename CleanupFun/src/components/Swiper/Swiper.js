@@ -65,7 +65,11 @@ function Swiper({
         renderNoMoreCards={() => {
           return (
             <LoadMoreCards
-              onRequestExit={()=>{ onLoadMoreCards && onLoadMoreCards(); }}
+              onRequestExit={()=>{
+                currentCard === fileItems.length
+                &&
+                onLoadMoreCards();
+              }}
             />
           )
         }}
