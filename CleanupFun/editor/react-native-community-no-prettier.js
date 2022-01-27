@@ -22,7 +22,6 @@ module.exports = {
     "react-hooks",
     "react-native",
     "@react-native-community",
-    "jest",
   ],
 
   settings: {
@@ -32,18 +31,6 @@ module.exports = {
   },
 
   overrides: [
-    {
-      files: ["*.js"],
-      parser: "babel-eslint",
-      plugins: ["flowtype"],
-      rules: {
-        // Flow Plugin
-        // The following rules are made available via `eslint-plugin-flowtype`
-
-        "flowtype/define-flow-type": 1,
-        "flowtype/use-flow-type": 1,
-      },
-    },
     {
       files: ["*.ts", "*.tsx"],
       parser: "@typescript-eslint/parser",
@@ -65,14 +52,19 @@ module.exports = {
         "**/__{mocks,tests}__/**/*.{js,ts,tsx}",
       ],
       env: {
-        jest: true,
-        "jest/globals": true,
       },
       rules: {
         "react-native/no-inline-styles": 0,
         quotes: [1, "double", { avoidEscape: true, allowTemplateLiterals: true }],
       },
     },
+    {
+      files: [
+        "*.js", ".jsx"
+      ],
+      rules: {
+      }
+    }
   ],
 
   // Map from global var to bool specifying if it can be redefined
@@ -121,6 +113,7 @@ module.exports = {
   },
 
   rules: {
+
     // General
     "comma-dangle": [1, "always-multiline"], // allow or disallow trailing commas
     "no-cond-assign": 1, // disallow assignment in conditional expressions
