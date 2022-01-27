@@ -115,10 +115,6 @@ const styles = StyleSheet.create({
   swiperCardInfo: {
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.7)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute', //Here is the trick
-    bottom: 0, //Here is the trick
     textAlign: "left"
   }
 });
