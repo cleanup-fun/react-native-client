@@ -97,8 +97,8 @@ export function SwiperCardContainer({ fileItem, mimetype, children }){
         <Image
           source={require("cleanupfun/assets/open-file.png")}
           style={{
-            height: 62,
-            width: 62,
+            height: 40,
+            width: 40,
             resizeMode: "contain",
           }}
         />
