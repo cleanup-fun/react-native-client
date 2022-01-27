@@ -1,5 +1,29 @@
 # Cleanup Fun
 
+## Getting Started
+
+### Client
+- cd ./CleanupFun
+- npm i
+- in one terminal
+  - `npx react-native start`
+- in a seperate terminal
+  - if testing ios
+    - `npm run ios`
+  - if testing android
+    - `npm run android`
+
+### Server
+- ./server/development/setup-ngrok.sh
+- [install docker](https://docs.docker.com/desktop/)
+- [install docker-compose](https://docs.docker.com/compose/install/)
+- In one terminal
+  - `sudo docker-compose -f ./server/development/docker-compose/docker-compose.yml`
+- In a seperate terminal
+  - `./server/development/mac/ngrok http 5000`
+  - Copy the url in ngrok to check it out!
+
+
 ## Purpose
 
 People run out of data and don't always want to upload it to the cloud. Some pictures are duplicates or unnecessary and don't need to be saved.
