@@ -58,3 +58,11 @@ buck-out/
 
 # CocoaPods
 CleanupFun/ios/Pods/
+
+# Hidden
+hidden
+hidden*
+hidden.*
+secret
+secret.*
+secret*
