@@ -57,12 +57,17 @@ buck-out/
 *.jsbundle
 
 # CocoaPods
-CleanupFun/ios/Pods/
+**/ios/Pods/
+
 
 # Hidden
-hidden
-hidden*
-hidden.*
-secret
-secret.*
-secret*
+**/hidden
+**/hidden.*
+**/hidden*
+**/secret
+**/secret.*
+**/secret*
+
+
+# Dist should only be on the compiled branch
+/dist
