@@ -17,6 +17,7 @@ const {
   BLACK_LIST_ERROR_MESSAGE,
   whitelist,
   blacklist,
+  shouldShortenKeyForDisplay
 } = keylessLoggerConfig;
 
 function validateKey(key){

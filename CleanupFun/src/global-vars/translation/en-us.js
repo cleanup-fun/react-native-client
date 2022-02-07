@@ -1,8 +1,31 @@
 
 export const enUSTranslation = {
-  // for the
+  // for the the please wait page
   PLEASE_WAIT_TIMEOUT: "Something went wrong, click to Exit",
   PLEASE_WAIT: "Please wait",
+
+  // For the Payment Page
+  PAYMENT_PAGE_HEADER: "Payment Status",
+  PAYMENT_PAGE_YOU_HAVENT_PAID_YET: "You haven't paid yet, it's free with ads",
+  PAYMENT_PAGE_EXPIRED: "Seems as though you're payment has expired",
+  PAYMENT_PAGE_EXPIRING_SOON: "You're payment is expiring soon, but you still have time left",
+  PAYMENT_PAGE_NO_WORRIES: "You've got time, nothing to worry about",
+
+  PAYMENT_PAGE_PROD_SALE: "Products For Sale",
+  PAYMENT_PAGE_REPEAT_BUY_ERROR: "You're already buying this product, please wait",
+  PAYMENT_PAGE_PEND_PURCH: "Pending Purchases",
+  PAYMENT_PAGE_PEND_ERROR: "This Purchase Failed",
+  PAYMENT_PAGE_PEND_SUCCESS: "This Purchase Succeeded",
+  PAYMENT_PAGE_PURCH_RES_NO_ISSUE: "No Issues",
+  PAYMENT_PAGE_PURCH_RES_WEBHOOK_FAILED: "The purchase was successful, but we need more time to validate it",
+  PAYMENT_PAGE_PURCH_RES_USER_CANCELED: "Puchase cancelled",
+  PAYMENT_PAGE_PURCH_RES_ALREADY_OWN: "You already own this product",
+  PAYMENT_PAGE_PURCH_RES_DEFERRED_PAYMENT: "The purchase has been processed, just waiting for approval",
+  PAYMENT_PAGE_PURCH_RES_REC_VAL_FAIL: "We need to revalidate your purchase",
+  PAYMENT_PAGE_PURCH_RES_REC_REQ_FAIL: "We are having trouble naking the purchase",
+  PAYMENT_PAGE_PURCH_RES_HAVE_SUB: "You already own this subscription",
+  PAYMENT_PAGE_PURCH_RES_USR_CONF: "This product is owned by a different user",
+  PAYMENT_PAGE_PURCH_RES_UNKNOWN: "We're unable to process your purchase, please try again later",
 
   // For Unmarked StartCleaning Page
   CLEAN_FROM_CAMERAROLL: "Clean from your Camera Roll",
