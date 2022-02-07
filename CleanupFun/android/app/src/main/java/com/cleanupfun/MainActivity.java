@@ -1,4 +1,4 @@
-package com.cleanupfun;
+package com.samtobia.formula1.cleanupfun;
 
 import com.facebook.react.ReactActivity;
 
