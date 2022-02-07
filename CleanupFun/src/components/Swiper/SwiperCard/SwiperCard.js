@@ -3,7 +3,7 @@ import { SwiperCardContainer } from "./SwiperCardContainer";
 import * as mime from "react-native-mime-types";
 
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
-const FILE_NAME = "/components/Swiper/SwiperCardSelector.js";
+const FILE_NAME = "/components/Swiper/SwiperCard.js";
 const logger = new KeyedLogger(FILE_NAME);
 
 import {
