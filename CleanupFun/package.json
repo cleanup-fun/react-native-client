@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
-    "ios": "react-native run-ios",
+    "android": "ENVFILE=env-vars/.env.dev react-native run-android",
+    "install-ios": "(export ENABLE_FLIPPER=true; cd ios && pod install && cd ..)",
+    "ios": "ENVFILE=env-vars/.env.dev ENABLE_FLIPPER=true react-native run-ios",
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint ."
