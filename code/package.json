@@ -15,12 +15,15 @@
     "@react-native-community/cameraroll": "^4.1.2",
     "@react-native-community/netinfo": "^7.1.7",
     "@react-native-community/slider": "^4.1.12",
+    "buffer": "^6.0.3",
+    "fastestsmallesttextencoderdecoder": "^1.0.22",
     "moment": "^2.29.1",
     "react": "17.0.2",
     "react-native": "0.67.1",
     "react-native-card-stack-swiper": "^1.2.5",
     "react-native-config": "^1.4.5",
     "react-native-document-picker": "^8.0.0",
+    "react-native-fetch-api": "^3.0.0",
     "react-native-file-opener": "github:rafaeltakahashi/react-native-file-opener",
     "react-native-file-viewer": "^2.1.5",
     "react-native-fs": "^2.18.0",
@@ -31,7 +34,9 @@
     "react-native-mime-types": "^2.3.0",
     "react-native-track-player": "^2.1.2",
     "react-native-video": "^5.2.0",
-    "react-router-native": "^6.2.1"
+    "react-router-native": "^6.2.1",
+    "readable-stream": "^3.6.0",
+    "web-streams-polyfill": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

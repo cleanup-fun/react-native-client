@@ -1,3 +1,5 @@
+import "./polyfills";
+
 import { SafeAreaView } from "react-native";
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
 const FILE_NAME = "/Main.js"
