@@ -14,7 +14,7 @@ function NoMoreFiles({ onRequestExit }){
   return (
     <TouchableOpacity
       style={repeatedStyles.centeringContainer}
-      onPress={()=>{ onRequestExit && onRequestExit }}
+      onPress={()=>{ onRequestExit && onRequestExit() }}
     >
       <TranslatedText tPath="NOMOREFILES_NOTICE" />
       <TranslatedText tPath="NOMOREFILES_CALL_TO_ACTION" />
