@@ -2,17 +2,23 @@
 import React, { useRef, useContext, useEffect } from "react";
 import { Platform } from "react-native";
 import Video from "react-native-video";
-import { MutedContext } from "cleanupfun/src/global-vars/muted";
+import { MutedContext } from "cleanupfun/src/global-vars/sound";
 
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
 const FILE_NAME = "/components/Swiper/SwiperCard/ItemTypes/Video.js";
 const logger = new KeyedLogger(FILE_NAME);
 
+import {
+  useActiveItem,
+} from "../../ActiveItemContext";
+
 import { styles } from "../../styles";
 
 const isFile = /^\//;
 
-export function VideoItem({ fileuri, active }){
+export function VideoItem({ fileuri, index }){
+  const [activeItem] = useActiveItem();
+  const active = index === activeItem;
   logger.log("video uri:", fileuri, active);
   const player = useRef();
   const [muted] = useContext(MutedContext);

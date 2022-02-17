@@ -19,9 +19,10 @@ const videoTest = /^video\//;
 const audioTest = /^audio\//;
 const imageTest = /^image\//;
 
-export function SwiperCard({ fileItem, active }){
+export function SwiperCard({ fileItem, index }){
   const fileuri = fileItem.fileuri;
   logger.log(fileItem);
+  logger.log(index);
 
   const baseFileName = fileuri.indexOf("?") > -1 ? (
     fileuri.split("?")[0]
@@ -34,6 +35,7 @@ export function SwiperCard({ fileItem, active }){
 
   return (
     <SwiperCardContainer
+     index={index}
      fileItem={fileItem}
      mimetype={mimetype}
     >
@@ -41,22 +43,22 @@ export function SwiperCard({ fileItem, active }){
         textTest.test(mimetype) ? (
           <TextItem
             fileuri={fileuri}
-            active={active}
+            index={index}
           />
         ) : videoTest.test(mimetype) ? (
           <VideoItem
             fileuri={fileuri}
-            active={active}
+            index={index}
           />
         ) : audioTest.test(mimetype) ? (
           <AudioItem
             fileuri={fileuri}
-            active={active}
+            index={index}
           />
         ) : imageTest.test(mimetype) ? (
           <ImageItem
             fileuri={fileuri}
-            active={active}
+            index={index}
           />
         ) : (
           <NoDisplayItem />

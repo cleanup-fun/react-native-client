@@ -4,6 +4,7 @@ import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
 const FILE_NAME = "/database/file-items/unmarked-file-items";
 const logger = new KeyedLogger(FILE_NAME);
 
+import { Readable } from "readable-stream";
 import { PermissionsAndroid, Platform } from "react-native";
 import { FileItemsAbstract } from "./file-items-abstract";
 
@@ -11,10 +12,10 @@ import { getFakeDB } from "../storage/fake/fakeDB";
 
 const DEFAULT_SORTORDER = "asc";
 
-export class UnmarkedFileItems extends FileItemsAbstract {
+export class UnmarkedFileItems extends Readable {
   constructor(){
-    super();
-    this.lastOffset = 0;
+    super({ objectMode: true });
+    this.offset = 0;
     this.sortOrder = DEFAULT_SORTORDER;
     this.cachedFiles = [];
   }
@@ -29,54 +30,53 @@ export class UnmarkedFileItems extends FileItemsAbstract {
   }
 
   async getCachedOrRetrieve(){
-    if(this.lastOffset === 0){
+    if(this.offset === 0){
       this.cachedFiles = await this.getFiles();
     }
     return this.cachedFiles;
   }
 
-  async getNextTen(){
+  async _read(){
     const hasPermission = await checkHasPermission();
     if(!hasPermission){
-      throw new Error("Don't have permission to read external storage")
+      throw new Error("Don't have permission to read external storage");
     }
     const [db, files] = await Promise.all([
       getFakeDB(),
       this.getCachedOrRetrieve()
     ]);
 
-    if(files.length <= this.lastOffset){
+    if(files.length <= this.offset){
       logger.log("no more photos available");
-      return [];
+      this.push(null);
     }
 
-    const nextTenItems = [];
+    var numberSearched = 1;
 
     if(this.sortOrder === "asc"){
-      var currentIndex = files.length - 1 - this.lastOffset;
-      while(nextTenItems.length < 10 && currentIndex >= 0){
-        checkAndAddFile(
+      var currentIndex = files.length - 1 - this.offset;
+      while(currentIndex >= 0){
+        if(checkAndAddFile(
           db,
           this.getFileInfo(files[currentIndex]),
-          nextTenItems,
-        );
+          this,
+        )) break;
+        numberSearched++;
         currentIndex--;
-        this.lastOffset++;
       }
-    }else{
-      var currentIndex = this.lastOffset;
-      while(nextTenItems.length < 10 && currentIndex < files.length){
-        checkAndAddFile(
+    } else {
+      var currentIndex = this.offset;
+      while(currentIndex < files.length){
+        if(await checkAndAddFile(
           db,
           this.getFileInfo(files[currentIndex]),
-          nextTenItems,
-        );
+          this,
+        )) break;
+        numberSearched++;
         currentIndex++;
-        this.lastOffset++;
       }
     }
-
-    return nextTenItems;
+    this.offset = this.offset + numberSearched;
   }
 
   sortAndFilter(sortAndFilterParams){
@@ -112,7 +112,7 @@ async function checkIsItemMarked(db, fileuri){
   return await db.hasItem("fileuri", fileuri);
 }
 
-async function checkAndAddFile(db, currentFile, nextItems){
+async function checkAndAddFile(db, currentFile, pushable){
   const {
     filePath,
     originalFilePath,
@@ -123,13 +123,13 @@ async function checkAndAddFile(db, currentFile, nextItems){
   logger.log("platform os:", Platform.OS);
 
   const isItemMarked = await checkIsItemMarked(db, filePath);
-  if(!isItemMarked){
-    nextItems.push({
-      filename: filename,
-      fileuri: filePath,
-      originalFilePath: originalFilePath,
-      markedTimestamp: timestamp,
-      shouldStore: UNDEFINED,
-    });
-  }
+  if(isItemMarked) return false;
+  pushable.push({
+    filename: filename,
+    fileuri: filePath,
+    originalFilePath: originalFilePath,
+    markedTimestamp: timestamp,
+    shouldStore: UNDEFINED,
+  });
+  return true;
 }

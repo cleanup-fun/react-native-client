@@ -7,6 +7,7 @@ import { AdSwiperSwitcher } from "../components/AdSwiperSwitcher";
 // import { RandomFileItems } from "./database/file-items/random-file-items";
 import { CameraRollFileItems } from "../database/file-items/cameraroll-file-items"
 import { DirectoryFileItems } from "../database/file-items/directory-file-items"
+import { FileItemsProvider } from "../database/file-items/FileItemsContext";
 
 const textStyle = {
   backgroundColor: "#AAA",
@@ -58,13 +59,15 @@ function StartCleaning(){
     );
   }
   return (
+    <FileItemsProvider readableStream={fileItemsobject}>
       <AdSwiperSwitcher
         fileItemsObject={fileItemsobject}
         onExit={()=>{
           setFileItemsObject(null);
         }}
       />
-  )
+    </FileItemsProvider>
+  );
 }
 
 export { StartCleaning }

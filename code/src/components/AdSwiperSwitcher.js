@@ -12,23 +12,49 @@ import { Alert } from "react-native";
 import { PleaseWait } from "./PleaseWait";
 import { Swiper } from "./Swiper/Swiper";
 import { Advertisement } from "./Advertisement/Advertisement";
+import { useFileItems } from "../database/file-items/FileItemsContext";
 
 // fileItems is FileItemsAbstract see /src/database/file-items-abstract.js
-export function AdSwiperSwitcher({ fileItemsObject, onExit }){
-  const navigator = useNavigator();
+export function AdSwiperSwitcher({ onExit }){
+  const navigate = useNavigator();
 
   const [loaded, setLoaded] = useState(false);
   const [showAd, setShowAd] = useState(true);
-  const [fileItems, setFileItems] = useState([]);
+  const [activeItems, setActiveItems] = useState(void 0);
+  const { fileItems, fileItemsObject, updateFileStatus } = useFileItems();
+  // console.log("file items object:", typeof fileItemsObject);
   useEffect(()=>{
+    if(!fileItemsObject) return console.log("no fileItems object");
     setShowAd(true);
     setLoaded(true);
-  }, [fileItemsObject])
+    const el = (e)=>{
+      Alert.alert(
+        "Error",
+        e.message || e.toString(),
+        [{
+          text: "OK",
+          onPress: () => {
+            logger.log("OK Pressed");
+            onExit();
+          }
+        }]
+      );
+    };
+    fileItemsObject.on("error", el);
+    return ()=>(fileItemsObject.off("error", el));
+  }, [fileItemsObject, onExit]);
+
+  useEffect(()=>{
+    if(showAd) return;
+    if(fileItems === activeItems) return;
+    setActiveItems(fileItems);
+    setLoaded(true);
+  }, [showAd, fileItems, activeItems]);
 
   if(!loaded){
     return (
       <PleaseWait />
-    )
+    );
   }
 
   if(showAd){
@@ -39,26 +65,11 @@ export function AdSwiperSwitcher({ fileItemsObject, onExit }){
           setLoaded(false);
 
           try {
-            const nextTen = await fileItemsObject.getNextTen()
-            setFileItems(nextTen);
-            setLoaded(true);
+            await fileItemsObject.step();
           }catch(e){
             if(/user canceled the document picker/.test(e.message)){
               return onExit();
             }
-            Alert.alert(
-              "Error",
-              e.message,
-              [
-                {
-                  text: "OK",
-                  onPress: () => {
-                    logger.log("OK Pressed");
-                    onExit();
-                  }
-                },
-              ]
-            );
           }
         }}
       />
@@ -67,24 +78,16 @@ export function AdSwiperSwitcher({ fileItemsObject, onExit }){
 
   return (
     <Swiper
-      fileItems={fileItems}
+      fileItems={activeItems}
 
       onSwipedRight={(index)=>{
         // right good, will save
-        fileItemsObject.updateFileStatus(fileItems[index].fileuri, false);
-        var newCards = [...fileItems];
-        newCards[index].shouldStore = false;
-        // hopefully it doesn't reset the cards
-        setFileItems(newCards);
+        updateFileStatus(fileItems[index].fileuri, false);
       }}
 
       onSwipedLeft={(index)=>{
         // left bad, will store
-        fileItemsObject.updateFileStatus(fileItems[index].fileuri, true);
-        var newCards = [...fileItems];
-        newCards[index].shouldStore = true;
-        // hopefully it doesn't reset the cards
-        setFileItems(newCards);
+        updateFileStatus(fileItems[index].fileuri, true);
       }}
 
       onLoadMoreCards={()=>{

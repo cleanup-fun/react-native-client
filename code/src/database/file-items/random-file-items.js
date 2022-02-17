@@ -18,7 +18,7 @@ class RandomFileItems extends FileItemsAbstract {
   constructor(){
     super();
   }
-  async getNextTen(){
+  async step(){
     if(SAFE_MAX_NUMBER_VALUE === this.lastOffset){
       return [];
     }

@@ -22,7 +22,7 @@ class UnmarkedFileItems extends FileItemsAbstract {
   constructor(){
     super();
   }
-  async getNextTen(){
+  async step(){
     const realm = await getRealm();
     var markedFiles = realm.objects("MarkedFile");
 

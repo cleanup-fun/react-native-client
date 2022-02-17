@@ -20,10 +20,22 @@ import { SwiperCard } from "./SwiperCard"
 
 import TrackPlayer from "react-native-track-player";
 import { clearTmpDir } from "cleanupfun/src/global-vars/file-handler";
+import {
+  useActiveItem,
+  ActiveItemProvider
+} from "./ActiveItemContext";
 
+import { useFileItems } from "../../database/file-items/FileItemsContext";
 
-function Swiper({
-  fileItems,
+export function Swiper(props){
+  return (
+    <ActiveItemProvider value={0}>
+      <SwiperNoContext {...props} />
+    </ActiveItemProvider>
+  )
+}
+
+function SwiperNoContext({
   onLoadMoreCards,
   hasMoreItems,
   onNoMoreFiles,
@@ -31,10 +43,12 @@ function Swiper({
   onSwipedLeft
 }){
   const swiperRef = useRef();
-  const [currentCard, setCurrentCard] = useState(0);
+  const [currentCard, setCurrentCard] = useActiveItem();
   const [trackPlayerReady, setTrackPLayerReady] = useState(false);
+  const { fileItems, ended } = useFileItems();
 
   useEffect(()=>{
+    logger.log("destroying and recreating")
     TrackPlayer.destroy();
     TrackPlayer.setupPlayer({}).then((player)=>{
       setTrackPLayerReady(true);
@@ -47,7 +61,7 @@ function Swiper({
     };
   }, []);
 
-  if(fileItems.length === 0){
+  if(ended){
     return (
       <NoMoreFiles
         onRequestExit={()=>{ onNoMoreFiles && onNoMoreFiles(); }}
@@ -88,12 +102,11 @@ function Swiper({
         {
           fileItems.map((fileItem, index)=>{
             logger.log("are we current?", fileItem, index, currentCard);
-            const active = currentCard === index;
             return (
               <SwiperCard
-                key={active + "-" + fileItem.shouldStore + "-" + fileItem.fileuri}
+                key={fileItem.fileuri}
                 fileItem={fileItem}
-                active={active}
+                index={index}
               />
             );
           })
@@ -124,5 +137,3 @@ function Swiper({
     </View>
   )
 }
-
-export { Swiper };

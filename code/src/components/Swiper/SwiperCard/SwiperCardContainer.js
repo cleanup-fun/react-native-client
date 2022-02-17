@@ -12,26 +12,26 @@ import {
   View,
 } from "react-native";
 
-import { TranslateableMoment } from "../Reused/TranslatableMoment";
-
 import { openFile, viewFile } from "cleanupfun/src/global-vars/file-handler";
 import RNFS from "react-native-fs";
 
 import { styles } from "../styles";
 
-import { translateKey } from "cleanupfun/src/global-vars/translation/translate.js";
-
 import { SwiperCardInfo } from "./SwiperCardInfo";
 
-export function SwiperCardContainer({ fileItem, mimetype, children }){
+import { useFileItems } from "../../../database/file-items/FileItemsContext";
+
+export function SwiperCardContainer({ index, mimetype, children }){
   const [cardHeight, setCardHeight] = useState(null);
   const [infoHeight, setInfoHeight] = useState(null);
   const [openHeight, setOpenHeight] = useState(null);
+  const fileItem = useFileItems(index, true);
+  const { shouldStore } = fileItem;
   const styleList = [styles.card].concat([
     (
-      fileItem.shouldStore === UNDEFINED ? styles.untouchedCard :
-      fileItem.shouldStore === false ? styles.savedCard :
-      fileItem.shouldStore === true ? styles.toStoreCard :
+      shouldStore === UNDEFINED ? styles.untouchedCard :
+      shouldStore === false ? styles.savedCard :
+      shouldStore === true ? styles.toStoreCard :
       styles.shouldntHappenCard
     )
   ]);

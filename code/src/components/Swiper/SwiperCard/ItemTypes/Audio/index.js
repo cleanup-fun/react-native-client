@@ -31,7 +31,9 @@ export function AudioItemEmpty(){
   return null;
 }
 
-export function AudioItem({ fileuri, active }){
+export function AudioItem({ fileuri, index }){
+  const [activeItem] = useActiveItem();
+  const active = activeItem === index;
 
   const prevActiveRef = useRef(false);
   const [muted] = useContext(MutedContext);
