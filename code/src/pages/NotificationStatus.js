@@ -11,13 +11,13 @@ import {
 
 import { repeatedStyles } from "../components/repeated-styles";
 
-import { useNavigate } from "react-router-native";
+import { useNavigator } from "cleanupfun/src/global-vars/navigator";
 
 import { PATH_MAIN_MENU } from "../router/route-constants";
 
 
 function NotificationStatus(){
-  const navigate = useNavigate();
+  const navigate = useNavigator();
 
   return (
     <TouchableOpacity

@@ -20,7 +20,7 @@ import { UserContextProvider } from "./global-vars/user";
 import { LanguageContextProvider, initializeI18Next } from "./global-vars/translation";
 import { IapContextProvider, setupIap } from "./global-vars/iap";
 import { MutedContextProvider, setupTrackPlayer } from "./global-vars/sound";
-import { NativeRouter } from "react-router-native";
+import { NavigatorContextProvider } from "./global-vars/navigator";
 
 import { AppRoutes } from "./router/AppRoutes";
 import { MenuWrapper } from "./router/MenuWrapper";
@@ -47,11 +47,14 @@ export function Main(){
       <LanguageContextProvider defaultLang={DEFAULT_LANG}>
       <IapContextProvider>
       <MutedContextProvider>
-      <NativeRouter component={MenuWrapper} location={PATH_MAIN_MENU}>
+      <NavigatorContextProvider
+        component={MenuWrapper}
+        location={PATH_MAIN_MENU}
+      >
         <MenuWrapper>
           <AppRoutes />
         </MenuWrapper>
-      </NativeRouter>
+      </NavigatorContextProvider>
       </MutedContextProvider>
       </IapContextProvider>
       </LanguageContextProvider>

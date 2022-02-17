@@ -95,7 +95,7 @@ export function AdSwiperSwitcher({ onExit }){
       }}
       onNoMoreFiles={()=>{
         logger.log("Finished");
-        navigator.to(PATH_MAIN_MENU);
+        navigate(PATH_MAIN_MENU);
       }}
     />
   );

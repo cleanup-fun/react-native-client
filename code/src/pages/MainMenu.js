@@ -5,7 +5,7 @@ const logger = new KeyedLogger(FILE_NAME)
 import React from 'react';
 import { FlatList, StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
-import { useNavigate } from "react-router-native";
+import { useNavigator } from "cleanupfun/src/global-vars/navigator";
 
 import { PATH_MAIN_MENU, routeItems } from "../router/route-constants";
 
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 });
 
 const MainMenu = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigator();
   const routeItemsArray = Object.values(routeItems);
 
   return (
@@ -35,7 +35,7 @@ const MainMenu = () => {
               key={item.key}
               onPress={()=>{
                 logger.log("pressed a menu item: ", item.path);
-                navigate(item.path)
+                navigate(item.path);
               }}
             >
               <Text style={styles.item}>{item.title}</Text>

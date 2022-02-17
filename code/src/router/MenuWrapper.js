@@ -5,8 +5,8 @@ const logger = new KeyedLogger(FILE_NAME)
 import React, { useState } from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 
-import { useHistory, useParams, useNavigate, Outlet } from "react-router-native";
-import { useNavigator } from "../global-vars/navigator";
+import { useLocation } from "react-router-native";
+import { useNavigator, useHistory } from "../global-vars/navigator";
 
 import Hamburger from 'react-native-hamburger';
 
