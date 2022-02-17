@@ -9,18 +9,17 @@ import { TranslatedText, TranslatedTimestamp } from "cleanupfun/src/global-vars/
 const WEEK = 7 * 24 * 60 * 60 * 1000;
 
 export function PaymentStatus(){
-  const user = useContext(UserContext);
-  const [paymentStatus, setPaymentStatus] = useState(null);
+  const user = useUser();
+  const [paymentStatusObj, setPaymentStatusObj] = useState(null);
 
   useEffect(()=>{
-    fetch(SERVER_ORIGIN + "/payment-status/" + user.id)
-    .then(async (res)=>{
-      const json = await res.json();
-      setPaymentStatus(json);
+    user.fetchJSON("/payment/status")
+    .then(async (json)=>{
+      setPaymentStatusObj(json);
     });
   }, [user]);
 
-  if(paymentStatus === null){
+  if(paymentStatusObj === null){
     return (<PleaseWait />);
   }
   const { now, paymentStatus } = paymentStatusObj;
