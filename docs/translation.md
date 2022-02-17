@@ -1,0 +1,2 @@
+- Open source the translation?
+- It would be nice to allow people to do custom date times also

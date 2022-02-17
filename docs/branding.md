@@ -1,0 +1,5 @@
+- Icons
+- Splash Screen
+- Styling for each page and each component
+- Website
+- Inapp purchase icon

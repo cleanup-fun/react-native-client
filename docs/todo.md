@@ -1,0 +1,6 @@
+- Support Page
+  - Basically a page that allows them to email or write us a message
+- Opt in to error sending
+  - Let them know that we can anonymously collect errors
+- Save stored status in the file system
+  - The gazelle has a better query system so I should wait
