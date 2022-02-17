@@ -1,32 +1,33 @@
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
-const FILE_NAME = "/pages/PaymentPage"
-const logger = new KeyedLogger(FILE_NAME)
+const FILE_NAME = "/pages/PaymentPage";
+const logger = new KeyedLogger(FILE_NAME);
 
 import React, { useEffect, useContext } from "react";
-import { UserContext } from "cleanupfun/src/global-vars/user";
+import { useUser } from "cleanupfun/src/global-vars/user";
 import { TranslatedText } from "cleanupfun/src/global-vars/translation";
 
 import { View } from "react-native";
 
 import { repeatedStyles } from "../../components/repeated-styles";
 
-import { useNavigate } from "react-router-native";
+import { useNavigator } from "cleanupfun/src/global-vars/navigator";
 
 import { PATH_PAYMENT_PAGE, PATH_USER } from "../../router/route-constants";
+import { PATH_LOGIN } from "../User/route-constants";
 import { BuyMoreTime } from "./BuyMoreTime";
 import { PaymentStatus } from "./PaymentStatus";
 
 function PaymentPage(){
-  const navigate = useNavigate();
-  const user = useContext(UserContext);
+  const navigate = useNavigator();
+  const user = useUser();
 
   useEffect(()=>{
-    if(user === null){
-      navigate.replace(
-        PATH_USER + "?redirect=" + encodeURIComponent(PATH_PAYMENT_PAGE),
-      );
-    }
+    if(!user.isLoggedIn) return;
+    navigate.replace(
+      PATH_LOGIN + "?redirect=" + encodeURIComponent(PATH_PAYMENT_PAGE),
+    );
   }, [navigate, user]);
+  if(!user.isLoggedIn) return null;
   return (
     <View style={repeatedStyles.centeringContainer}>
       <View>
