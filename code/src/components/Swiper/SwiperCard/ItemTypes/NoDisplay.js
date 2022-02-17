@@ -2,15 +2,16 @@ import React from "react";
 
 import { Text } from "react-native";
 
-import { translateKey } from "cleanupfun/src/global-vars/translation/translate.js";
+import { TranslatedText } from "cleanupfun/src/global-vars/translation";
 
 export function NoDisplayItem({ style, fileuri }){
   return (
-    <Text
+    <TranslatedText
       style={{
         width: "100%",
         textAlign: "center"
       }}
-    >{translateKey("SWIPER_CARD_NO_DISPLAY_ITEM")}</Text>
+      tPath="SWIPER_CARD_NO_DISPLAY_ITEM"
+    />
   );
 }

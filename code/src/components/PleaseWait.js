@@ -11,7 +11,7 @@ import {
 
 import { repeatedStyles } from "./repeated-styles";
 
-import { translateKey } from "../global-vars/translation/translate.js";
+import { TranslatedText } from "../global-vars/translation";
 
 /*
 
@@ -39,7 +39,7 @@ function PleaseWait({ onExit }){
         style={repeatedStyles.centeringContainer}
         onPress={()=>{ onExit && onExit() }}
       >
-        <Text>{translateKey("PLEASE_WAIT_TIMEOUT")}</Text>
+        <TranslatedText tPath={"PLEASE_WAIT_TIMEOUT"} />
       </TouchableOpacity>
     )
   }
@@ -48,7 +48,7 @@ function PleaseWait({ onExit }){
     <View
       style={repeatedStyles.centeringContainer}
     >
-      <Text>{translateKey("PLEASE_WAIT")}</Text>
+      <TranslatedText tPath={"PLEASE_WAIT"} />
     </View>
   )
 }

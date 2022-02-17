@@ -25,7 +25,7 @@ function ProductsForSale({ iap }){
   const [errors, setErrors] = useState({});
   return (
     <View>
-      <TranslatedText key="PAYMENT_PAGE_PROD_SALE" />
+      <TranslatedText tPath="PAYMENT_PAGE_PROD_SALE" />
       <View>
         {
           iap.productsForSale.map((product)=>(
@@ -51,7 +51,7 @@ function ProductsForSale({ iap }){
                 <Text style={styles.productPrice}>{product.price}</Text>
                 {
                   !(product.id in errors) ? null : (
-                    <TranslatedText key="PAYMENT_PAGE_REPEAT_BUY_ERROR" />
+                    <TranslatedText tPath="PAYMENT_PAGE_REPEAT_BUY_ERROR" />
                   )
                 }
               </View>
@@ -67,7 +67,7 @@ function PendingPurchases({ iap }){
 
   return (
     <View>
-      <TranslatedText key="PAYMENT_PAGE_PEND_PURCH" />
+      <TranslatedText tPath="PAYMENT_PAGE_PEND_PURCH" />
       <View>
         {
           iap.pendingPurchases.map((product)=>{
@@ -89,18 +89,18 @@ function ProductStatus({ product }){
   switch(product.purchaseStatus){
     case -1: return (
       <View>
-        <TranslatedText key="PAYMENT_PAGE_PEND_ERROR" />
+        <TranslatedText tPath="PAYMENT_PAGE_PEND_ERROR" />
         <TranslatedText
-          key={"PAYMENT_PAGE_PURCH_RES_" + product.purchaseResult}
+          tPath={"PAYMENT_PAGE_PURCH_RES_" + product.purchaseResult}
         />
       </View>
     );
-    case 0: return (<TranslatedText key="PAYMENT_PAGE_PENDING_STATUS" />);
+    case 0: return (<TranslatedText tPath="PAYMENT_PAGE_PENDING_STATUS" />);
     case 1: return (
       <View>
-        <TranslatedText key="PAYMENT_PAGE_PEND_SUCCESS" />
+        <TranslatedText tPath="PAYMENT_PAGE_PEND_SUCCESS" />
         <TranslatedText
-          key={"PAYMENT_PAGE_PURCH_RES_" + product.purchaseResult}
+          tPath={"PAYMENT_PAGE_PURCH_RES_" + product.purchaseResult}
         />
       </View>
     );

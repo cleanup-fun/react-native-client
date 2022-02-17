@@ -7,24 +7,31 @@ import {
   View,
 } from "react-native";
 
-import { TranslateableMoment } from "../../Reused/TranslatableMoment";
-
 import { styles } from "../styles";
 
-import { translateKey } from "cleanupfun/src/global-vars/translation/translate.js";
+import {
+  TranslatedText, TranslatedTimestamp,
+  useTranslate
+} from "cleanupfun/src/global-vars/translation";
 
 export function SwiperCardInfo({ fileItem }){
+  const { t, tTimestamp } = useTranslate();
+  const timestamp = fileItem.markedTimestamp;
   return (
     <View
       style={[styles.swiperCardInfo]}
     >
-      <Text>{translateKey("SWIPERCARD_FILE_NAME")}: {fileItem.filename}</Text>
-      <Text>{translateKey("SWIPERCARD_FILE_URI")}: {fileItem.fileuri}</Text>
-      <Text>{translateKey("SWIPERCARD_MARKED_TIMESTAMP")}: <TranslateableMoment timestamp={fileItem.markedTimestamp} /></Text>
-      <Text>{translateKey("SWIPERCARD_STORED_STATUS")}: {
-        fileItem.shouldStore === UNDEFINED ? translateKey("SWIPER_CARD_STORED_STATUS_NEW") :
-        fileItem.shouldStore === true ? translateKey("SWIPER_CARD_STORED_STATUS_STORED") :
-        translateKey("SWIPER_CARD_STORED_STATUS_SAVED")
+      <Text>{t("SWIPERCARD_FILE_NAME")}: {fileItem.filename}</Text>
+      <Text>{t("SWIPERCARD_FILE_URI")}: {fileItem.fileuri}</Text>
+      <View style={{ display: "flex", flexDirection: "row" }}>
+        <TranslatedText tPath="SWIPERCARD_STORED_STATUS" />
+        <Text>: </Text>
+        <TranslatedTimestamp timestamp={timestamp} />
+      </View>
+      <Text>{t("SWIPERCARD_STORED_STATUS")}: {
+        fileItem.shouldStore === UNDEFINED ? t("SWIPER_CARD_STORED_STATUS_NEW") :
+        fileItem.shouldStore === true ? t("SWIPER_CARD_STORED_STATUS_STORED") :
+        t("SWIPER_CARD_STORED_STATUS_SAVED")
       }</Text>
     </View>
   );

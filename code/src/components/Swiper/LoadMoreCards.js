@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { translateKey } from "../../global-vars/translation/translate";
+import { TranslatedText } from "../../global-vars/translation";
 import { repeatedStyles } from "../repeated-styles";
 
 
@@ -22,12 +22,14 @@ function LoadMoreCards({ onRequestExit }){
       }}
       onPress={()=>{ onRequestExit && onRequestExit(); }}
     >
-      <Text
+      <TranslatedText
         style={{ fontWeight: '700', fontSize: 18, color: 'gray' }}
-      >{translateKey("LOADMORECARDS_NOTICE")}</Text>
-      <Text
+        tPath="LOADMORECARDS_NOTICE"
+      />
+      <TranslatedText
         style={{ fontWeight: '700', fontSize: 18, color: 'gray' }}
-      >{translateKey("LOADMORECARDS_CALL_TO_ACTION")}</Text>
+        tPath="LOADMORECARDS_CALL_TO_ACTION"
+      />
     </TouchableOpacity>
   );
 }

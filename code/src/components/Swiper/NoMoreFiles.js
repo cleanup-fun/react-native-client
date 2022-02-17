@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { translateKey } from "../../global-vars/translation/translate";
+import { TranslatedText } from "../../global-vars/translation";
 
 import { repeatedStyles } from "../repeated-styles";
 
@@ -16,8 +16,8 @@ function NoMoreFiles({ onRequestExit }){
       style={repeatedStyles.centeringContainer}
       onPress={()=>{ onRequestExit && onRequestExit }}
     >
-      <Text>{translateKey("NOMOREFILES_NOTICE")}</Text>
-      <Text>{translateKey("NOMOREFILES_CALL_TO_ACTION")}</Text>
+      <TranslatedText tPath="NOMOREFILES_NOTICE" />
+      <TranslatedText tPath="NOMOREFILES_CALL_TO_ACTION" />
     </TouchableOpacity>
   )
 }

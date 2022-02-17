@@ -3,10 +3,8 @@ import { View } from "react-native";
 import { PleaseWait } from "../../components/PleaseWait";
 
 import { UserContext } from "cleanupfun/src/global-vars/user";
-import { TranslatedText } from "cleanupfun/src/global-vars/translation";
-import { TranslateableMoment } from "cleanupfun/src/components/Reused/TranslateableMoment";
-
 import { SERVER_ORIGIN } from "cleanupfun/src/constants";
+import { TranslatedText, TranslatedTimestamp } from "cleanupfun/src/global-vars/translation";
 
 const WEEK = 7 * 24 * 60 * 60 * 1000;
 
@@ -25,35 +23,44 @@ export function PaymentStatus(){
   if(paymentStatus === null){
     return (<PleaseWait />);
   }
-  if(!paymentStatus.date){
+  const { now, paymentStatus } = paymentStatusObj;
+  console.log(paymentStatus);
+  if(paymentStatus.status === "new"){
     return (
       <View>
-        <TranslatedText key="PAYMENT_PAGE_YOU_HAVENT_PAID_YET" />
+        <TranslatedText tPath="PAYMENT_PAGE_YOU_HAVENT_PAID_YET" />
       </View>
     );
   }
-  const now = Date.now();
-  const diff = now - paymentStatus;
+  if(paymentStatus.status === "bad"){
+    return (
+      <View>
+        <TranslatedText tPath="PAYMENT_PAGE_YOUR_IN_DEBT" />
+      </View>
+    );
+  }
+  const { timeBalance, startDate } = paymentStatus;
+  const diff = timeBalance - (now - startDate);
   if(diff <= 0){
     return (
       <View stye={{ display: "flex", flexDirection: "column" }}>
-        <TranslatedText key="PAYMENT_PAGE_EXPIRED" />
-        <TranslateableMoment typestamp={diff} />
+        <TranslatedText tPath="PAYMENT_PAGE_EXPIRED" />
+        <TranslatedTimestamp timestamp={diff} />
       </View>
     );
   }
   if(diff < WEEK){
     return (
       <View stye={{ display: "flex", flexDirection: "column" }}>
-        <TranslatedText key="PAYMENT_PAGE_EXPIRING_SOON" />
-        <TranslateableMoment typestamp={diff} />
+        <TranslatedText tPath="PAYMENT_PAGE_EXPIRING_SOON" />
+        <TranslatedTimestamp timestamp={diff} />
       </View>
     );
   }
   return (
     <View style={{ display: "flex", flexDirection: "column" }}>
-      <TranslatedText key="PAYMENT_PAGE_NO_WORRIES" />
-      <TranslateableMoment typestamp={diff} />
+      <TranslatedText tPath="PAYMENT_PAGE_NO_WORRIES" />
+      <TranslatedTimestamp timestamp={diff} />
     </View>
   );
 }

@@ -30,7 +30,7 @@ function PaymentPage(){
   return (
     <View style={repeatedStyles.centeringContainer}>
       <View>
-        <TranslatedText key="PAYMENT_PAGE_HEADER" />
+        <TranslatedText tPath="PAYMENT_PAGE_HEADER" />
       </View>
       <BuyMoreTime />
       <PaymentStatus />

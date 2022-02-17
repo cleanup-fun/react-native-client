@@ -1,7 +1,6 @@
 import React, {useState, useContext} from "react";
 import { View, TouchableOpacity, Text } from "react-native";
-import { LanguageContextProvider } from "../translation/translate";
-import { translateKey } from "../global-vars/translation/translate.js";
+import { TranslatedText } from "../global-vars/translation";
 import { AdSwiperSwitcher } from "../components/AdSwiperSwitcher";
 
 
@@ -40,19 +39,23 @@ function StartCleaning(){
             setFileItemsObject(new CameraRollFileItems());
           }}
         >
-          <Text style={textStyle}>{translateKey("CLEAN_FROM_CAMERAROLL")}</Text>
+          <TranslatedText
+            style={textStyle}
+            tPath="CLEAN_FROM_CAMERAROLL"
+          />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={()=>{
             setFileItemsObject(new DirectoryFileItems());
           }}
         >
-          <Text
+          <TranslatedText
             style={textStyle}
-          >{translateKey("CLEAN_FROM_DIRECTORY")}</Text>
+            tPath="CLEAN_FROM_DIRECTORY"
+          />
         </TouchableOpacity>
       </View>
-    )
+    );
   }
   return (
       <AdSwiperSwitcher
@@ -63,6 +66,5 @@ function StartCleaning(){
       />
   )
 }
-
 
 export { StartCleaning }
