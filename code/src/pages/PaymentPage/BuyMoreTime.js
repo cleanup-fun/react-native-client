@@ -4,7 +4,7 @@ import { StyleSheet, Platform, TouchableOpacity, View, Text } from "react-native
 import { IapContext } from "cleanupfun/src/global-vars/iap";
 import { TranslatedText } from "cleanupfun/src/global-vars/translation";
 
-export function PaymentStatus(){
+export function BuyMoreTime(){
   const iap = useContext(IapContext);
 
   return (
