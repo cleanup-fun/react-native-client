@@ -1,5 +1,5 @@
 
-import { UNDEFINED } from "cleanupfun/src/constants";
+import { UNDEFINED } from "cleanupfun/src/global-vars/constants";
 
 import React from "react";
 import {

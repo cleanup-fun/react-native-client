@@ -1,4 +1,4 @@
-import { SAFE_MAX_NUMBER_VALUE } from "cleanupfun/src/constants";
+import { SAFE_MAX_NUMBER_VALUE } from "cleanupfun/src/global-vars/constants";
 
 import { KeyedLogger } from "cleanupfun/src/global-vars/logger";
 const FILE_NAME = "/database/file-items/camera-roll-file-items";

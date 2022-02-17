@@ -4,7 +4,7 @@ const logger = new KeyedLogger(FILE_NAME);
 
 import {
   PAID_STATUS_ASYNC_STORAGE_KEY,
-} from "cleanupfun/src/constants";
+} from "cleanupfun/src/global-vars/constants";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
