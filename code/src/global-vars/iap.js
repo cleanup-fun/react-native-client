@@ -11,14 +11,44 @@ export const IapContext = createContext();
 
 export function IapContextProvider({ children }){
   const user = useContext(UserContext);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [pendingPurchases, setPendingPurchases] = useState([]);
   const [activeProducts, setActiveProducts] = useState([]);
   const [productsForSale, setProductsForSale] = useState([]);
+
+  // useEffect(()=>{
+  //   setupIap().then(()=>{
+  //     setIapHubInit(true);
+  //   });
+  // }, []);
+
   useEffect(()=>{
-    if(user === null) return;
-    Iaphub.setUserId(user.id);
+    // if(!iapHubInit) return;
+    const ls = [
+      user.listenToSignIn(()=>{
+        console.log("user in inapp purchases:", user);
+        if(!user || !user.id){
+          console.log("no user in iap");
+          return;
+        }
+        Iaphub.setUserId(user.iaphubId);
+        setUserLoggedIn(true);
+      }, true),
+      user.listenToSignOut(()=>{
+        Iaphub.setUserId("-");
+        setUserLoggedIn(false);
+      }, true),
+    ];
+    return ()=>(
+      ls.map((l)=>(l()))
+    );
   }, [user]);
   useEffect(()=>{
+    if(!userLoggedIn){
+      setActiveProducts([]);
+      setProductsForSale([]);
+      return;
+    }
     function l(){
       Iaphub.getActiveProducts().then((ps)=>{
         setActiveProducts(ps);
@@ -32,18 +62,25 @@ export function IapContextProvider({ children }){
     return ()=>{
       Iaphub.removeEventListener("onUserUpdate", l);
     };
-  }, []);
+  }, [userLoggedIn]);
 
   return (
-    <IapContext.Provider value={{
-      pendingPurchases: [...pendingPurchases],
-      activeProducts: [...activeProducts],
-      productsForSale: [...productsForSale],
-      buy: (product, delay)=>{
-        if(typeof delay !== "number") delay = 4 * 1000;
-        return buy(product, delay, pendingPurchases, setPendingPurchases);
-      },
-    }}>
+    <IapContext.Provider value={
+      !userLoggedIn ? {
+        pendingPurchases: [],
+        activeProducts: [],
+        productsForSale: [],
+        buy: async ()=>{},
+      } : {
+        pendingPurchases: [...pendingPurchases],
+        activeProducts: [...activeProducts],
+        productsForSale: [...productsForSale],
+        buy: (product, delay)=>{
+          if(typeof delay !== "number") delay = 4 * 1000;
+          return buy(product, delay, pendingPurchases, setPendingPurchases);
+        },
+      }
+    }>
       { children }
     </IapContext.Provider>
   );
