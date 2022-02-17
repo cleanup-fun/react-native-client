@@ -8,7 +8,7 @@ import { TouchableOpacity, View, Image } from "react-native";
 import TrackPlayer, { State as TrackPlayerState, useProgress } from "react-native-track-player";
 import { styles } from "./styles";
 
-import { MutedContext } from "cleanupfun/src/global-vars/muted";
+import { MutedContext } from "cleanupfun/src/global-vars/sound";
 
 export function SeekPausePlay(){
   const {

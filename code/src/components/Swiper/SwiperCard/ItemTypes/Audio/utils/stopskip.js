@@ -5,7 +5,9 @@ const queRes = new QueuedResolver();
 
 export function stopTrackPlayer(){
   return queRes.wrap(()=>(
-    TrackPlayer.stop()
+
+    // not using stop because it clears the entire queue
+    TrackPlayer.pause()
   ));
 }
 

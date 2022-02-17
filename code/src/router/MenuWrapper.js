@@ -3,7 +3,7 @@ const FILE_NAME = "/pages/PaymentPage.js"
 const logger = new KeyedLogger(FILE_NAME)
 
 import React, { useState } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 
 import { useLocation } from "react-router-native";
 import { useNavigator, useHistory } from "../global-vars/navigator";
@@ -52,3 +52,16 @@ function MenuWrapper({ children }){
 }
 
 export { MenuWrapper };
+
+const soundPng = require("cleanupfun/assets/sound.png")
+const mutePng = require("cleanupfun/assets/mute.png")
+
+function MuteButton(){
+  const [muted, setMuted] = useMuted();
+
+  return (
+    <TouchableOpacity onPress={()=>(setMuted(!muted))} >
+      <Image source={muted ? soundPng : mutePng} />
+    </TouchableOpacity>
+  )
+}

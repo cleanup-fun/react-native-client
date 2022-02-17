@@ -1,5 +1,5 @@
 import React from "react";
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 import TrackPlayer, { RepeatMode, Capability } from "react-native-track-player";
 
@@ -33,6 +33,10 @@ export async function setupTrackPlayer(){
 }
 
 const MutedContext = createContext([true, ()=>{}]);
+
+export function useMuted(){
+  return useContext(MutedContext);
+}
 
 function MutedContextProvider({ children }){
   const [muted, setMuted] = useState(false);

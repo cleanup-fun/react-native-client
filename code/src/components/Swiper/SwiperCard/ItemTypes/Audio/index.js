@@ -11,7 +11,11 @@ import { stopTrackPlayer, skipTrackPlayer } from "./utils/stopskip";
 import { styles as audioStyles } from "./styles";
 import { styles as swiperStyles } from "../../../styles";
 
-import { MutedContext } from "cleanupfun/src/global-vars/muted";
+import {
+  useActiveItem,
+} from "../../../ActiveItemContext";
+
+import { MutedContext } from "cleanupfun/src/global-vars/sound";
 
 import { PositionSlider } from "./PositionSlider";
 import { SeekPausePlay } from "./SeekPausePlay";
@@ -46,13 +50,23 @@ export function AudioItem({ fileuri, index }){
 
     // If you wan't to understand the track object, here
     // https://react-native-track-player.js.org/documentation/#track-object
-    addTrack({
-      id: fileuri,
-      url: fileuri,
-      title: fileuri.split("/").pop(),
-      artist: "Unknown",
-    }).then((index)=>{
-      setItemIndex(index);
+    TrackPlayer.getQueue().then((q)=>{
+      logger.log("track player queue:", q);
+      for(var i = 0; i < q.length; i++){
+        if(q[i].id === fileuri){
+          logger.log("already added track");
+          return i;
+        }
+      }
+      logger.log("adding track");
+      return addTrack({
+        id: fileuri,
+        url: fileuri,
+        title: fileuri.split("/").pop(),
+        artist: "Unknown",
+      });
+    }).then((foundIndex)=>{
+      setItemIndex(foundIndex);
     });
   }, [fileuri, itemIndex]);
 
@@ -63,7 +77,11 @@ export function AudioItem({ fileuri, index }){
     // I believe listening to the fileitems update was causing issues
     return ()=>{
       if(itemIndex === null) return;
-      if(active) TrackPlayer.stop();
+
+      // not using stop because it clears the entire queue
+      // This also causes other bugs
+      // and anyway, when the swiper unmounts the trackplayer is destroyed
+      if(active) TrackPlayer.pause();
     };
   }, [itemIndex, active]);
 
