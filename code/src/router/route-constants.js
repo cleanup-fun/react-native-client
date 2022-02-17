@@ -3,7 +3,7 @@ import { MainMenu } from "../pages/MainMenu";
 import { StartCleaning } from "../pages/StartCleaning"
 import { PaymentPage } from "../pages/PaymentPage";
 import { BrowseSwiped } from "../pages/BrowseSwiped";
-import { LoginOrRegister } from "../pages/LoginOrRegister";
+import { routeItems as userRouteItems } from "../pages/User/route-constants";
 import { NotificationStatus } from "../pages/NotificationStatus";
 
 
@@ -11,7 +11,7 @@ export const PATH_MAIN_MENU = "/";
 export const PATH_START_CLEANING = "/start-cleaning";
 export const PATH_PAYMENT_PAGE = "/pay";
 export const PATH_BROWSE_SWIPED = "/browse-swiped";
-export const PATH_USER = "/user";
+export const PATH_USER = "/user/";
 export const PATH_NOTIFICATION = "/notifications";
 
 const routeItems = {
@@ -40,10 +40,10 @@ const routeItems = {
     component: BrowseSwiped,
   },
   [PATH_USER]: {
-    key: 'LoginOrRegister',
-    title: "Signout, Login Or Register",
+    key: 'User',
+    title: "User Page",
     path: PATH_USER,
-    component: LoginOrRegister
+    routes: userRouteItems
   },
   [PATH_NOTIFICATION]: {
     key: 'NotificationStatus',

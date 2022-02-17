@@ -361,6 +361,8 @@ PODS:
     - React-perflogger (= 0.67.1)
   - RNCAsyncStorage (1.15.15):
     - React-Core
+  - RNDeviceInfo (8.4.9):
+    - React-Core
   - RNFileViewer (2.1.5):
     - React-Core
   - RNFS (2.18.0):
@@ -437,6 +439,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNFileViewer (from `../node_modules/react-native-file-viewer`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNIap (from `../node_modules/react-native-iap`)
@@ -538,6 +541,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFileViewer:
     :path: "../node_modules/react-native-file-viewer"
   RNFS:
@@ -601,6 +606,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 2c92a8bddd1a3e72c7513d1e74235c2d9c84875c
   ReactCommon: 2e816fad39f65f2a94a5999d5be463a6b620dcf6
   RNCAsyncStorage: 0bef6a21517c0254bd6bd59a3672963abfa0d18e
+  RNDeviceInfo: 4944cf8787b9c5bffaf301fda68cc1a2ec003341
   RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
   RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
   RNIap: 32921e87fd252b6e439ce7a369b998811a4bc9c5

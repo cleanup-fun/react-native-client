@@ -1,7 +1,9 @@
 import React from "react";
 import { Platform, NativeModules } from "react-native";
-import { createContext, useState } from "react";
-
+import { createContext, useContext, useState } from "react";
+import { getUniqueId } from "react-native-device-info";
+import { User } from "./user-class";
+import { USER_ASYNC_STORAGE_KEY } from "../constants";
 /*
 
 Should probably allow the user to login and register
@@ -20,12 +22,14 @@ function getDeviceId(){
 
 const UserContext = createContext([true, ()=>{}]);
 
+export function useUser(){
+  return useContext(UserContext);
+}
+
 function UserContextProvider({ children }){
-  const [user, setUser] = useState({
-    id: getDeviceId(),
-  });
+  const [user] = useState(new User(USER_ASYNC_STORAGE_KEY));
   return (
-    <UserContext.Provider value={[user, setUser]}>
+    <UserContext.Provider value={user}>
       {children}
     </UserContext.Provider>
   );
